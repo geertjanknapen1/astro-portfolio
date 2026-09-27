@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
 import { getCollection } from 'astro:content';
@@ -32,7 +33,7 @@ const projects = (await getCollection('projects', ({ data }) => data.featured)).
                 <div class="hero-actions">
                     <a class="button" href="#over-mij">
                         Even kennismaken?
-                        <span aria-hidden="true">↗</span>
+                        <ArrowIcon size={20} />
                     </a>
 
                     <a
