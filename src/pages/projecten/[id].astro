@@ -1,22 +1,43 @@
-
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection, render } from 'astro:content';
+import {
+  getCollection,
+  render,
+  type CollectionEntry,
+} from 'astro:content';
 import type { GetStaticPaths } from 'astro';
+import { internalPath } from '../../utils/paths';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  previousProject: CollectionEntry<'projects'> | null;
+  nextProject: CollectionEntry<'projects'> | null;
+}
 
 export const getStaticPaths = (async () => {
-  const projects = await getCollection('projects');
+  const projects = (await getCollection('projects')).sort(
+    (a, b) =>
+      a.data.order - b.data.order ||
+      a.id.localeCompare(b.id)
+  );
 
-  return projects.map((project) => ({
+  return projects.map((project, index) => ({
     params: { id: project.id },
-    props: { project },
+    props: {
+      project,
+      previousProject: projects[index - 1] ?? null,
+      nextProject: projects[index + 1] ?? null,
+    },
   }));
 }) satisfies GetStaticPaths;
 
-const { project } = Astro.props;
-const { Content } = await render(project);
+const {
+  project,
+  previousProject,
+  nextProject,
+} = Astro.props;
 
-const base = import.meta.env.BASE_URL;
+const { Content } = await render(project);
 
 const categoryLabel =
   project.data.category === 'personal'
@@ -27,6 +48,10 @@ const statusLabel =
   project.data.status === 'in-progress'
     ? 'In ontwikkeling'
     : 'Afgerond';
+
+const projectNumber = String(
+  project.data.order
+).padStart(2, '0');
 ---
 
 <BaseLayout
@@ -36,94 +61,258 @@ const statusLabel =
   <article>
     <header class="project-hero">
       <div class="container">
-        <a class="back-link" href={`${base}projecten/`}>
-          ← Alle projecten
+        <a
+          class="back-link"
+          href={internalPath('projecten/')}
+        >
+          <span aria-hidden="true">←</span>
+          Alle projecten
         </a>
 
-        <p class="eyebrow">
-          {categoryLabel} · {statusLabel}
-        </p>
+        <div class="hero-heading">
+          <div class="hero-copy">
+            <p class="eyebrow">
+              {categoryLabel} / {project.data.year}
+            </p>
 
-        <h1>{project.data.title}<span>.</span></h1>
+            <h1>
+              {project.data.title}<span>.</span>
+            </h1>
 
-        <p class="description">
-          {project.data.description}
-        </p>
+            <p class="hero-description">
+              {project.data.description}
+            </p>
+          </div>
 
-        {
-            (project.data.company || project.data.employer) && (
-                <dl class="project-meta">
-                {project.data.company && (
-                    <div>
-                    <dt>Opdrachtgever</dt>
-                    <dd>{project.data.company}</dd>
-                    </div>
-                )}
+          <span
+            class="project-number"
+            aria-hidden="true"
+          >
+            {projectNumber}
+          </span>
+        </div>
 
-                {project.data.employer && (
-                    <div>
-                    <dt>Uitgevoerd vanuit</dt>
-                    <dd>{project.data.employer}</dd>
-                    </div>
-                )}
-                </dl>
+        <dl class="project-details">
+          <div>
+            <dt>Project</dt>
+            <dd>{categoryLabel}</dd>
+          </div>
+
+          <div>
+            <dt>Status</dt>
+            <dd>{statusLabel}</dd>
+          </div>
+
+          {
+            project.data.company && (
+              <div>
+                <dt>Opdrachtgever</dt>
+                <dd>{project.data.company}</dd>
+              </div>
             )
-        }
+          }
 
-        <ul class="tags" aria-label="Gebruikte technieken">
-          {project.data.tags.map((tag: string) => (
-            <li>{tag}</li>
-          ))}
-        </ul>
+          {
+            project.data.employer && (
+              <div>
+                <dt>Uitgevoerd vanuit</dt>
+                <dd>{project.data.employer}</dd>
+              </div>
+            )
+          }
+        </dl>
       </div>
     </header>
 
-    <div class="container">
-      <div class="project-body">
-        <Content />
+    <section class="project-story">
+      <div class="container story-layout">
+        <aside class="story-label">
+          <span>01 /</span>
+          Het verhaal
+        </aside>
+
+        <div class="story-content">
+          <Content />
+        </div>
       </div>
-    </div>
+    </section>
+
+    <footer class="project-footer">
+      <div class="container">
+        <div class="technologies">
+          <p class="eyebrow">
+            Gebruikte technieken
+          </p>
+
+          <ul aria-label="Gebruikte technieken">
+            {
+              project.data.tags.map((tag) => (
+                <li>{tag}</li>
+              ))
+            }
+          </ul>
+        </div>
+
+        {
+          (previousProject || nextProject) && (
+            <div class="project-navigation">
+              <p class="eyebrow">
+                Ontdek meer projecten
+              </p>
+
+              <nav
+                class="navigation-grid"
+                aria-label="Navigatie tussen projecten"
+              >
+                {
+                  previousProject && (
+                    <a
+                      class="navigation-card previous"
+                      href={internalPath(
+                        `projecten/${previousProject.id}/`
+                      )}
+                      rel="prev"
+                    >
+                      <span class="navigation-label">
+                        ← Vorig project
+                      </span>
+
+                      <span class="navigation-title">
+                        <span class="navigation-number">
+                          {String(
+                            previousProject.data.order
+                          ).padStart(2, '0')}
+                        </span>
+
+                        {previousProject.data.title}
+                      </span>
+                    </a>
+                  )
+                }
+
+                {
+                  nextProject && (
+                    <a
+                      class="navigation-card next"
+                      href={internalPath(
+                        `projecten/${nextProject.id}/`
+                      )}
+                      rel="next"
+                    >
+                      <span class="navigation-label">
+                        Volgend project →
+                      </span>
+
+                      <span class="navigation-title">
+                        <span class="navigation-number">
+                          {String(
+                            nextProject.data.order
+                          ).padStart(2, '0')}
+                        </span>
+
+                        {nextProject.data.title}
+                      </span>
+                    </a>
+                  )
+                }
+              </nav>
+            </div>
+          )
+        }
+
+        <a
+          class="all-projects"
+          href={internalPath('projecten/')}
+        >
+          Alle projecten bekijken
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </footer>
   </article>
 </BaseLayout>
 
 <style>
+  /* Hero */
+
   .project-hero {
-    padding-block: clamp(4rem, 9vw, 8rem);
-    border-bottom: 1px solid var(--color-border);
+    padding-block:
+      clamp(2rem, 5vw, 4rem)
+      clamp(4rem, 9vw, 8rem);
   }
 
   .back-link {
-    display: inline-block;
-    margin-bottom: 4rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: clamp(4rem, 9vw, 8rem);
     color: var(--color-muted);
-    font-size: 0.9rem;
+    font-size: 0.875rem;
     font-weight: 600;
   }
 
+  .back-link:hover {
+    color: var(--color-brick);
+  }
+
+  .hero-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .hero-copy {
+    max-width: 850px;
+    min-width: 0;
+  }
+
   h1 {
-    margin-block: 1rem 2rem;
-    font-size: clamp(4rem, 10vw, 8rem);
+    margin-block: 1.5rem 2rem;
+    font-size: clamp(4rem, 11vw, 9rem);
+    line-height: 1;
+    letter-spacing: -0.065em;
+    overflow-wrap: anywhere;
   }
 
   h1 span {
     color: var(--color-brick);
   }
 
-  .description {
-    max-width: 720px;
+  .hero-description {
+    max-width: 740px;
+    margin: 0;
     color: var(--color-muted);
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-size: clamp(1.25rem, 2.5vw, 1.8rem);
+    line-height: 1.55;
   }
 
-  .project-meta {
+  .project-number {
+    flex-shrink: 0;
+    color: var(--color-border);
+    font-family: var(--font-accent);
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 1;
+  }
+
+  /* Projectinformatie */
+
+  .project-details {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem 4rem;
-    margin-block: 2rem;
-   }
+    gap: 2rem 4rem;
+    margin: clamp(4rem, 8vw, 7rem) 0 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+  }
 
-   .project-meta dt {
-    margin-bottom: 0.35rem;
+  .project-details > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .project-details dt {
     color: var(--color-muted);
     font-size: 0.75rem;
     font-weight: 700;
@@ -131,59 +320,253 @@ const statusLabel =
     text-transform: uppercase;
   }
 
-   .project-meta dd {
+  .project-details dd {
     margin: 0;
-    font-size: 1.05rem;
+    font-size: 1rem;
     font-weight: 600;
-    }
+  }
 
-  .tags {
+  /* Projectverhaal */
+
+  .project-story {
+    padding-block: clamp(4rem, 9vw, 9rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .story-layout {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 7rem);
+  }
+
+  .story-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 0.4rem;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .story-label span {
+    color: var(--color-brick);
+  }
+
+  .story-content {
+    width: 100%;
+    max-width: 760px;
+    min-width: 0;
+    font-size: clamp(1.05rem, 1.6vw, 1.15rem);
+    line-height: 1.9;
+  }
+
+  .story-content :global(h2) {
+    margin-block: 4rem 1.5rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+  }
+
+  .story-content :global(h2:first-child) {
+    margin-top: 0;
+  }
+
+  .story-content :global(h3) {
+    margin-block: 2.5rem 1rem;
+    font-size: 1.5rem;
+  }
+
+  .story-content :global(p) {
+    margin-bottom: 1.75rem;
+    color: var(--color-muted);
+  }
+
+  .story-content :global(strong) {
+    color: var(--color-ink);
+  }
+
+  .story-content :global(a) {
+    color: var(--color-brick);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .story-content :global(blockquote) {
+    margin: 3rem 0;
+    padding: 0.5rem 0 0.5rem 2rem;
+    border-left: 3px solid var(--color-brick);
+    font-family: var(--font-accent);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  .story-content :global(blockquote p) {
+    margin: 0;
+    color: var(--color-ink);
+  }
+
+  .story-content :global(ul),
+  .story-content :global(ol) {
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    color: var(--color-muted);
+  }
+
+  .story-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Footer */
+
+  .project-footer {
+    padding-block: clamp(3rem, 6vw, 6rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .technologies ul {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.6rem;
-    margin: 2rem 0 0;
+    gap: 0.65rem;
+    margin: 1.5rem 0 0;
     padding: 0;
     list-style: none;
   }
 
-  .tags li {
-    padding: 0.4rem 0.8rem;
+  .technologies li {
+    padding: 0.5rem 0.85rem;
     border: 1px solid var(--color-border);
     border-radius: 999px;
     font-size: 0.8rem;
     font-weight: 600;
   }
 
-  .project-body {
-    max-width: 760px;
-    margin-inline: auto;
-    padding-block: clamp(4rem, 8vw, 7rem);
-    font-size: 1.1rem;
-    line-height: 1.85;
+  /* Vorig en volgend project */
+
+  .project-navigation {
+    margin-top: clamp(5rem, 10vw, 9rem);
+    padding-top: 3rem;
+    border-top: 1px solid var(--color-border);
   }
 
-  /* Styling voor HTML die uit Markdown wordt gegenereerd. */
-  .project-body :global(h2) {
-    margin-block: 3rem 1rem;
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+  .navigation-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
   }
 
-  .project-body :global(h2:first-child) {
-    margin-top: 0;
+  /* Eén navigatiekaart krijgt de volledige breedte. */
+
+  .navigation-grid > .navigation-card:only-child {
+    grid-column: 1 / -1;
   }
 
-  .project-body :global(p) {
-    margin-bottom: 1.5rem;
-  }
-
-  .project-body :global(a) {
-    color: var(--color-brick);
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  .project-body :global(img) {
-    margin-block: 2.5rem;
+  .navigation-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+    gap: 3rem;
+    padding: clamp(1.5rem, 3vw, 2.5rem);
+    border: 1px solid var(--color-border);
     border-radius: 8px;
+    transition:
+      background 180ms ease,
+      border-color 180ms ease;
+  }
+
+  .navigation-card:hover {
+    border-color: var(--color-brick);
+    background: var(--color-sand);
+    color: var(--color-ink);
+  }
+
+  .navigation-card.next {
+    text-align: right;
+  }
+
+  .navigation-label {
+    color: var(--color-brick);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .navigation-title {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .next .navigation-title {
+    justify-content: flex-end;
+  }
+
+  .navigation-number {
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-size: 0.7em;
+    font-weight: 500;
+  }
+
+  /* Terug naar overzicht */
+
+  .all-projects {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    width: fit-content;
+    margin: 3rem auto 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .all-projects:hover {
+    border-color: var(--color-brick);
+    color: var(--color-brick);
+  }
+
+  /* Responsive */
+
+  @media (max-width: 760px) {
+    .project-number {
+      display: none;
+    }
+
+    .story-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .project-details {
+      gap: 2rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .navigation-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .navigation-card {
+      min-height: 140px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navigation-card {
+      transition: none;
+    }
   }
 </style>

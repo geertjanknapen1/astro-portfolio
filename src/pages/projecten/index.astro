@@ -1,13 +1,22 @@
-
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
+import { internalPath } from '../../utils/paths';
 
-const base = import.meta.env.BASE_URL;
+const projects = (await getCollection('projects')).sort(
+  (a, b) =>
+    a.data.order - b.data.order ||
+    a.id.localeCompare(b.id)
+);
 
-const projects = (await getCollection('projects'))
-  .sort((a, b) => a.data.order - b.data.order);
+const personalCount = projects.filter(
+  (project) => project.data.category === 'personal'
+).length;
+
+const professionalCount = projects.filter(
+  (project) => project.data.category === 'professional'
+).length;
 ---
 
 <BaseLayout
@@ -27,29 +36,215 @@ const projects = (await getCollection('projects'))
         </p>
       </header>
 
-      <div class="project-list">
-        {projects.map((project, index) => (
-          <ProjectCard
-            number={String(index + 1).padStart(2, '0')}
-            title={project.data.title}
-            description={project.data.description}
-            tags={project.data.tags}
-            href={`${base}projecten/${project.id}/`}
-          />
-        ))}
+      {
+        projects.length > 0 && (
+          <div class="projects-toolbar">
+            <div
+              class="project-filters"
+              role="group"
+              aria-label="Filter projecten"
+            >
+              <button
+                class="filter-button is-active"
+                type="button"
+                data-filter="all"
+                aria-pressed="true"
+              >
+                Alle projecten
+                <span class="filter-count">
+                  {projects.length}
+                </span>
+              </button>
+
+              <button
+                class="filter-button"
+                type="button"
+                data-filter="personal"
+                aria-pressed="false"
+              >
+                Eigen projecten
+                <span class="filter-count">
+                  {personalCount}
+                </span>
+              </button>
+
+              <button
+                class="filter-button"
+                type="button"
+                data-filter="professional"
+                aria-pressed="false"
+              >
+                Professioneel
+                <span class="filter-count">
+                  {professionalCount}
+                </span>
+              </button>
+            </div>
+
+            <p
+              class="results-count"
+              id="project-results-count"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            >
+              {projects.length}
+              {projects.length === 1
+                ? ' project'
+                : ' projecten'}
+            </p>
+          </div>
+        )
+      }
+
+      <div class="project-list" id="project-list">
+        {
+          projects.map((project) => (
+            <div
+              class="project-item"
+              data-project-category={project.data.category}
+            >
+              <ProjectCard
+                number={String(
+                  project.data.order
+                ).padStart(2, '0')}
+                title={project.data.title}
+                description={project.data.description}
+                tags={project.data.tags}
+                href={internalPath(
+                  `projecten/${project.id}/`
+                )}
+              />
+            </div>
+          ))
+        }
       </div>
+
+      {
+        projects.length === 0 && (
+          <div class="empty-state">
+            <h2>Hier wordt aan gewerkt.</h2>
+            <p>
+              Binnenkort verschijnen hier mijn projecten.
+            </p>
+          </div>
+        )
+      }
+
+      <p
+        class="empty-state"
+        id="filter-empty-state"
+        hidden
+      >
+        Er zijn nog geen projecten in deze categorie.
+      </p>
     </div>
   </section>
 </BaseLayout>
 
+<script>
+  type ProjectFilter =
+    | 'all'
+    | 'personal'
+    | 'professional';
+
+  const filterButtons =
+    document.querySelectorAll<HTMLButtonElement>(
+      '.filter-button'
+    );
+
+  const projectItems =
+    document.querySelectorAll<HTMLElement>(
+      '[data-project-category]'
+    );
+
+  const resultsCount =
+    document.querySelector<HTMLElement>(
+      '#project-results-count'
+    );
+
+  const emptyState =
+    document.querySelector<HTMLElement>(
+      '#filter-empty-state'
+    );
+
+  function filterProjects(
+    selectedFilter: ProjectFilter
+  ): void {
+    let visibleCount = 0;
+
+    projectItems.forEach((project) => {
+      const category =
+        project.dataset.projectCategory;
+
+      const isVisible =
+        selectedFilter === 'all' ||
+        category === selectedFilter;
+
+      project.hidden = !isVisible;
+
+      if (isVisible) {
+        visibleCount++;
+      }
+    });
+
+    filterButtons.forEach((button) => {
+      const isActive =
+        button.dataset.filter === selectedFilter;
+
+      button.classList.toggle(
+        'is-active',
+        isActive
+      );
+
+      button.setAttribute(
+        'aria-pressed',
+        String(isActive)
+      );
+    });
+
+    if (resultsCount) {
+      resultsCount.textContent =
+        `${visibleCount} ${
+          visibleCount === 1
+            ? 'project'
+            : 'projecten'
+        }`;
+    }
+
+    if (emptyState) {
+      emptyState.hidden = visibleCount !== 0;
+    }
+  }
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedFilter =
+        button.dataset.filter as
+          | ProjectFilter
+          | undefined;
+
+      if (!selectedFilter) {
+        return;
+      }
+
+      filterProjects(selectedFilter);
+    });
+  });
+</script>
+
 <style>
+  /* Pagina */
+
   .projects-page {
     padding-block: clamp(5rem, 10vw, 9rem);
   }
 
+  /* Introductie */
+
   .page-heading {
     max-width: 800px;
-    margin-bottom: clamp(4rem, 8vw, 7rem);
+    margin-bottom: clamp(3rem, 6vw, 5rem);
   }
 
   h1 {
@@ -63,7 +258,160 @@ const projects = (await getCollection('projects'))
     font-size: 1.2rem;
   }
 
+  /* Filterbalk */
+
+  .projects-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .project-filters {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .filter-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    min-height: 44px;
+    padding: 0.65rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+
+    transition:
+      background 180ms ease,
+      border-color 180ms ease,
+      color 180ms ease;
+  }
+
+  .filter-button:hover {
+    border-color: var(--color-brick);
+    color: var(--color-brick);
+  }
+
+  .filter-button.is-active {
+    border-color: var(--color-ink);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .filter-button.is-active:hover {
+    border-color: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .filter-button:focus-visible {
+    outline: 3px solid var(--color-brick);
+    outline-offset: 4px;
+  }
+
+  .filter-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.4rem;
+    height: 1.4rem;
+    padding-inline: 0.3rem;
+    border-radius: 999px;
+    background: var(--color-sand);
+    color: var(--color-ink);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+
+  .filter-button.is-active .filter-count {
+    background: rgba(255, 255, 255, 0.15);
+    color: var(--color-paper);
+  }
+
+  /* Aantal resultaten */
+
+  .results-count {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  /* Projecten */
+
   .project-list {
     border-bottom: 1px solid var(--color-border);
+  }
+
+  /*
+   * Expliciet verbergen is belangrijk:
+   * het hidden-attribuut moet altijd voorrang krijgen.
+   */
+
+  .project-item[hidden] {
+    display: none;
+  }
+
+  /* Lege resultaten */
+
+  .empty-state {
+    padding-block: 4rem;
+    color: var(--color-muted);
+    text-align: center;
+  }
+
+  .empty-state h2 {
+    margin-bottom: 1rem;
+    color: var(--color-ink);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .empty-state p {
+    margin: 0;
+  }
+
+  .empty-state[hidden] {
+    display: none;
+  }
+
+  /* Mobiel */
+
+  @media (max-width: 650px) {
+    .projects-toolbar {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .project-filters {
+      gap: 0.5rem;
+    }
+
+    .filter-button {
+      gap: 0.5rem;
+      padding: 0.65rem 0.85rem;
+      font-size: 0.8rem;
+    }
+
+    .results-count {
+      padding-left: 0.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .filter-button {
+      transition: none;
+    }
   }
 </style>

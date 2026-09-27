@@ -1,4 +1,3 @@
-
 ---
 title: "Shoplocator"
 description: "Een project rondom het vinden van verkooppunten."
@@ -14,9 +13,36 @@ employer: "Bertels Holland B.V."
 
 ## Het project
 
-Een project waarbij bezoekers verkooppunten
-kunnen vinden.
+Tijdens mijn werk bij Bertels Holland
+heb ik gewerkt aan een project rondom
+het vinden van verkooppunten.
 
-*Deze beschrijving is voorlopig. De technische
-implementatie, mijn eigen bijdrage en het projectjaar
-moeten nog worden gecontroleerd.*
+Het doel van een shoplocator is om
+bezoekers te helpen bij het vinden
+van locaties waar producten
+verkrijgbaar zijn.
+
+## Achter de schermen
+
+Een shoplocator lijkt aan de
+voorkant misschien een relatief
+eenvoudige functionaliteit.
+
+Toch is het een interessant
+voorbeeld van een project waarbij
+de verwerking en presentatie
+van gegevens een belangrijke
+rol spelen.
+
+Bij dit project heb ik gewerkt
+met PHP.
+
+## Mijn bijdrage
+
+Dit project is onderdeel van mijn
+ervaring met het ontwikkelen
+van webapplicaties.
+
+De precieze technische uitwerking
+en mijn specifieke werkzaamheden
+wil ik hier later verder toelichten.

@@ -1,259 +1,251 @@
-
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
-const base = import.meta.env.BASE_URL;
+import { getCollection } from 'astro:content';
+import { internalPath } from '../utils/paths';
+
+const projects = (await getCollection('projects', ({ data }) => data.featured)).sort(
+    (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <BaseLayout
-  title="Home"
-  description="Geert-Jan Knapen: backenddeveloper met een voorliefde voor PHP, Symfony en software die gewoon goed werkt."
+    title="Home"
+    description="Geert-Jan Knapen: backenddeveloper met een voorliefde voor PHP, Symfony en software die gewoon goed werkt."
 >
-  <section class="hero">
-    <div class="container hero-inner">
-      <div class="hero-content">
-        <p class="eyebrow">Hallo, ik ben Geert-Jan 👋</p>
+    <section class="hero">
+        <div class="container hero-inner">
+            <div class="hero-content">
+                <p class="eyebrow">Hallo, ik ben Geert-Jan 👋</p>
 
-        <h1>
-          Ik bouw graag dingen die
-          <span>gewoon goed werken.</span>
-        </h1>
+                <h1>
+                    Ik bouw graag dingen die
+                    <span>gewoon goed werken.</span>
+                </h1>
 
-        <p class="intro">
-          Backenddeveloper met een voorliefde voor PHP,
-          Symfony en oplossingen waar mensen écht iets aan hebben.
-        </p>
+                <p class="intro">
+                    Backenddeveloper met een voorliefde voor PHP,
+                    Symfony en oplossingen waar mensen écht iets aan hebben.
+                </p>
 
-        <div class="hero-actions">
-          <a class="button" href="#over-mij">
-            Even kennismaken?
-            <span aria-hidden="true">↗</span>
-          </a>
+                <div class="hero-actions">
+                    <a class="button" href="#over-mij">
+                        Even kennismaken?
+                        <span aria-hidden="true">↗</span>
+                    </a>
 
-          <a class="button button--outline" href="#achter-de-schermen">
-            Achter de schermen
-          </a>
+                    <a
+                        class="button button--outline"
+                        href="#achter-de-schermen"
+                    >
+                        Achter de schermen
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-note">
+                <span class="note-label">Reminder</span>
+
+                <p>
+                    Niet lullen, maar poetsen.
+                    <em>Wel eerst even nadenken.</em>
+                </p>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <div class="hero-note">
-        <span class="note-label">Reminder</span>
-        <p>
-          Niet lullen, maar poetsen.
-          <em>Wel eerst even nadenken.</em>
-        </p>
-      </div>
-    </div>
-  </section>
+    <section id="over-mij" class="about-section">
+        <div class="container about-inner">
+            <div>
+                <p class="eyebrow">Even voorstellen</p>
 
-  <section id="over-mij" class="about-section">
-    <div class="container about-inner">
-      <div>
-        <p class="eyebrow">Even voorstellen</p>
-        <h2>
-          Meer dan alleen
-          <em>code.</em>
-        </h2>
-      </div>
+                <h2>
+                    Meer dan alleen
+                    <em>code.</em>
+                </h2>
+            </div>
 
-      <div class="about-copy">
-        <p>
-		  Ik ben Geert-Jan Knapen. Mij maak je blij met
-		  technische uitdagingen, nette code en software
-		  die echt het verschil maakt.
-        </p>
+            <div class="about-copy">
+                <p>
+                    Ik ben Geert-Jan Knapen. Mij maak je blij met
+                    technische uitdagingen, nette code en software
+                    die echt het verschil maakt.
+                </p>
 
-        <p>
-		  Ik werk het liefst aan de backend van applicaties.
-		  Niet omdat de frontend niet belangrijk of interessant is,
-		  maar omdat ik het gigantisch tof vind als alles achter
-		  de schermen doet wat het moet doen.
-        </p>
+                <p>
+                    Ik werk het liefst aan de backend van applicaties.
+                    Niet omdat de frontend niet belangrijk of interessant is,
+                    maar omdat ik het gigantisch tof vind als alles achter
+                    de schermen doet wat het moet doen.
+                </p>
 
-        <p>
-		  Buiten werktijd? Dan ga ik er graag op uit.
-		  Een concert, een avondje lachen met vrienden
-		  of lekker aan het carnavallen.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section id="achter-de-schermen" class="projects-section">
-    <div class="container">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Achter de schermen</p>
-          <h2>Dingen waar ik aan heb gebouwd.</h2>
+                <p>
+                    Buiten werktijd? Dan ga ik er graag op uit.
+                    Een concert, een avondje lachen met vrienden
+                    of lekker aan het carnavallen.
+                </p>
+            </div>
         </div>
+    </section>
 
-        <p>
-          Van eigen projecten tot werk waar ik met plezier
-          mijn tanden in heb gezet.
-        </p>
-      </div>
+    <section
+        id="achter-de-schermen"
+        class="projects-section"
+    >
+        <div class="container">
+            <div class="section-heading">
+                <div>
+                    <p class="eyebrow">Achter de schermen</p>
 
-      <div class="project-list">
-        <ProjectCard
-          number="01"
-          title="Pact"
-          description="Een hobbyproject waarmee ik mezelf verder verdiep in Symfony en het bouwen van een complete SaaS-applicatie."
-          tags={['Symfony', 'PHP', 'PostgreSQL', 'Docker']}
-          href={`${base}projecten/pact/`}
-        />
+                    <h2>Dingen waar ik aan heb gebouwd.</h2>
+                </div>
 
-        <ProjectCard
-          number="02"
-          title="Plagron"
-          description="Een meertalige website waarbij content, e-commerce en verschillende systemen achter de schermen samenkomen."
-          tags={['PHP', 'Statamic', 'GraphQL', 'Shopify']}
-          href={`${base}projecten/plagron/`}
-        />
+                <p>
+                    Van eigen projecten tot werk waar ik met plezier
+                    mijn tanden in heb gezet.
+                </p>
+            </div>
 
-        <ProjectCard
-          number="03"
-          title="Shoplocator"
-          description="Een technische oplossing waarmee bezoekers snel verkooppunten bij hen in de buurt kunnen vinden."
-          tags={['PHP', 'JavaScript', 'API']}
-          href={`${base}projecten/shoplocator/`}
-        />
-      </div>
-    </div>
-  </section>
+            <div class="project-list">
+                {
+                    projects.map((project, index) => (
+                        <ProjectCard
+                            number={String(index + 1).padStart(2, '0')}
+                            title={project.data.title}
+                            description={project.data.description}
+                            tags={project.data.tags}
+                            href={internalPath(`projecten/${project.id}/`)}
+                        />
+                    ))
+                }
+            </div>
+        </div>
+    </section>
 </BaseLayout>
 
 <style>
-  .hero {
-    padding-block: clamp(5rem, 12vw, 10rem);
-  }
+    .hero {
+        padding-block: clamp(5rem, 12vw, 10rem);
+    }
 
-  .hero-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 260px;
-    align-items: end;
-    gap: clamp(2rem, 5vw, 5rem);
-  }
+    .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 260px;
+        align-items: end;
+        gap: clamp(2rem, 5vw, 5rem);
+    }
 
-  .hero-content {
-    max-width: 790px;
-  }
+    .hero-content {
+        max-width: 790px;
+    }
 
-  h1 {
-    max-width: 800px;
-    margin-block: 1.5rem;
-    font-size: clamp(3.2rem, 7vw, 6.5rem);
-    font-weight: 700;
-    line-height: 1.05;
-  }
+    h1 {
+        max-width: 800px;
+        margin-block: 1.5rem;
+        font-size: clamp(3.2rem, 7vw, 6.5rem);
+        font-weight: 700;
+        line-height: 1.05;
+    }
 
-  h1 span {
-    color: var(--color-brick);
-    margin-left: 0.15em;
-  }
+    h1 span {
+        margin-left: 0.15em;
+        color: var(--color-brick);
+    }
 
-  .intro {
-    max-width: 600px;
-    color: var(--color-muted);
-    font-size: clamp(1.1rem, 2vw, 1.35rem);
-  }
+    .intro {
+        max-width: 600px;
+        color: var(--color-muted);
+        font-size: clamp(1.1rem, 2vw, 1.35rem);
+    }
 
-  .hero-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
 
-  .hero-actions a {
-    gap: 0.75rem;
-  }
-
-  .hero-note {
-    position: relative;
-    margin-bottom: 1rem;
-    padding: 1.5rem;
-    border: 1px solid var(--color-border);
-    border-radius: 6px;
-    background: var(--color-sand);
-    transform: rotate(3deg);
-  }
-
-  .note-label {
-    color: var(--color-brick);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .hero-note p {
-    margin: 0.75rem 0 0;
-    font-size: 1.2rem;
-    font-weight: 700;
-    line-height: 1.35;
-  }
-
-  .hero-note em {
-    display: block;
-    margin-top: 0.4rem;
-    font-family: var(--font-accent);
-    font-weight: 500;
-  }
-
-  .about-section {
-    padding-block: clamp(4rem, 8vw, 7rem);
-    background: var(--color-sand);
-  }
-
-  .about-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 8vw, 7rem);
-  }
-
-  .projects-section {
-    padding-block: clamp(6rem, 12vw, 10rem);
-  }
-
-  h2 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-  }
-
-  h2 em {
-    display: block;
-    color: var(--color-brick);
-    font-family: var(--font-accent);
-    font-weight: 500;
-  }
-
-  .about-copy {
-    font-size: 1.05rem;
-  }
-
-  .about-copy p {
-    margin-bottom: 1.5rem;
-  }
-
-  .next-section {
-    padding-block: 6rem;
-    text-align: center;
-  }
-
-  .next-section p:last-child {
-    color: var(--color-muted);
-  }
-
-  @media (max-width: 800px) {
-    .hero-inner,
-    .about-inner {
-      grid-template-columns: 1fr;
+    .hero-actions a {
+        gap: 0.75rem;
     }
 
     .hero-note {
-      max-width: 320px;
-      margin: 2rem 0 0;
-      transform: rotate(-2deg);
+        position: relative;
+        margin-bottom: 1rem;
+        padding: 1.5rem;
+        border: 1px solid var(--color-border);
+        border-radius: 6px;
+        background: var(--color-sand);
+        transform: rotate(3deg);
     }
-  }
+
+    .note-label {
+        color: var(--color-brick);
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+    }
+
+    .hero-note p {
+        margin: 0.75rem 0 0;
+        font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.35;
+    }
+
+    .hero-note em {
+        display: block;
+        margin-top: 0.4rem;
+        font-family: var(--font-accent);
+        font-weight: 500;
+    }
+
+    .about-section {
+        padding-block: clamp(4rem, 8vw, 7rem);
+        background: var(--color-sand);
+    }
+
+    .about-inner {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: clamp(2rem, 8vw, 7rem);
+    }
+
+    .projects-section {
+        padding-block: clamp(6rem, 12vw, 10rem);
+    }
+
+    h2 {
+        font-size: clamp(2.5rem, 5vw, 4rem);
+    }
+
+    h2 em {
+        display: block;
+        color: var(--color-brick);
+        font-family: var(--font-accent);
+        font-weight: 500;
+    }
+
+    .about-copy {
+        font-size: 1.05rem;
+    }
+
+    .about-copy p {
+        margin-bottom: 1.5rem;
+    }
+
+    @media (max-width: 800px) {
+        .hero-inner,
+        .about-inner {
+            grid-template-columns: 1fr;
+        }
+
+        .hero-note {
+            max-width: 320px;
+            margin: 2rem 0 0;
+            transform: rotate(-2deg);
+        }
+    }
 </style>
