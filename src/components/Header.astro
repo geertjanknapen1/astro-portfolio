@@ -1,5 +1,6 @@
 ---
 import { internalPath } from '../utils/paths';
+import ArrowIcon from './ArrowIcon.astro';
 
 const currentPath = Astro.url.pathname;
 
@@ -150,7 +151,7 @@ const isHome = isCurrentPage(homePath);
                       class="mobile-link-arrow"
                       aria-hidden="true"
                     >
-                      ↗
+                      <ArrowIcon size={22} />
                     </span>
                   </a>
                 </li>
@@ -503,10 +504,6 @@ const isHome = isCurrentPage(homePath);
 
     .mobile-link--active .mobile-link-label {
       color: var(--color-brick);
-    }
-
-    .mobile-link--active .mobile-link-arrow {
-      transform: rotate(45deg);
     }
 
     /* Onderschrift */
