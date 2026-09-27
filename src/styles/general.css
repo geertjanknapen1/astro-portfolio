@@ -1,0 +1,143 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap');
+
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #292724;
+  background: #f7f4ee;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+
+  --color-paper: #f7f4ee;
+  --color-ink: #292724;
+  --color-brick: #a84437;
+  --color-sand: #e8ddd0;
+  --color-muted: #605951;
+  --color-border: #ded7cc;
+
+  --font-body: 'DM Sans', sans-serif;
+  --font-accent: 'Fraunces', Georgia, serif;
+
+  --container-width: 1120px;
+  --page-padding: clamp(1.25rem, 5vw, 3rem);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-brick);
+}
+
+a:focus-visible {
+  outline: 3px solid var(--color-brick);
+  outline-offset: 5px;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+}
+
+::selection {
+  color: white;
+  background: var(--color-brick);
+}
+
+.container {
+  width: min(
+    calc(100% - 2 * var(--page-padding)),
+    var(--container-width)
+  );
+  margin-inline: auto;
+}
+
+.eyebrow {
+  color: var(--color-brick);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid var(--color-brick);
+  border-radius: 8px;
+  background: var(--color-brick);
+  color: white;
+  font-weight: 600;
+  transition:
+    background 150ms ease,
+    transform 150ms ease;
+}
+
+.button:hover {
+  background: #87352c;
+  color: white;
+  transform: translateY(-2px);
+}
+
+.button--outline {
+  background: transparent;
+  color: var(--color-brick);
+}
+
+.button--outline:hover {
+  background: var(--color-sand);
+  color: var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .button {
+    transition: none;
+  }
+
+  .button:hover {
+    transform: none;
+  }
+}
