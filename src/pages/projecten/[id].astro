@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArrowIcon from '../../components/ArrowIcon.astro';
 import {
   getCollection,
   render,
@@ -66,7 +67,7 @@ const projectNumber = String(
           class="back-link"
           href={internalPath('projecten/')}
         >
-          <span aria-hidden="true">←</span>
+          <ArrowIcon direction="left" size={18} />
           Alle projecten
         </a>
 
@@ -175,7 +176,8 @@ const projectNumber = String(
                       rel="prev"
                     >
                       <span class="navigation-label">
-                        ← Vorig project
+                        <ArrowIcon direction="left" size={16} />
+                        Vorig project
                       </span>
 
                       <span class="navigation-title">
@@ -201,7 +203,8 @@ const projectNumber = String(
                       rel="next"
                     >
                       <span class="navigation-label">
-                        Volgend project →
+                        Volgend project
+                        <ArrowIcon direction="right" size={16} />
                       </span>
 
                       <span class="navigation-title">
@@ -226,7 +229,7 @@ const projectNumber = String(
           href={internalPath('projecten/')}
         >
           Alle projecten bekijken
-          <span aria-hidden="true">↗</span>
+          <ArrowIcon size={18} />
         </a>
       </div>
     </footer>
@@ -488,6 +491,9 @@ const projectNumber = String(
   }
 
   .navigation-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
     color: var(--color-brick);
     font-size: 0.75rem;
     font-weight: 700;
