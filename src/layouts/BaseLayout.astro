@@ -6,54 +6,138 @@ import { internalPath } from '../utils/paths';
 import '../styles/general.css';
 
 interface Props {
-    title: string;
-    description?: string;
+  title: string;
+  description?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
 }
 
 const {
-    title,
-    description = 'Portfolio Geert-Jan Knapen',
+  title,
+  description = 'Het portfolio van Geert-Jan Knapen. Backenddeveloper met een voorliefde voor PHP, Symfony en software die gewoon goed werkt.',
+  type = 'website',
+  noindex = false,
 } = Astro.props;
 
-const pageTitle = `${title} | Geert-Jan Knapen`;
+const siteName = 'Geert-Jan Knapen';
+
+const pageTitle =
+  title === 'Home'
+    ? `${siteName} | Backenddeveloper`
+    : `${title} | ${siteName}`;
+
+// Astro.url bevat de actuele pagina-URL.
+// Eventuele queryparameters en fragmenten
+// horen niet thuis in een canonical URL.
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.url.origin);
+
+const canonical = canonicalUrl.toString();
+
+const robotsContent = noindex
+  ? 'noindex, follow'
+  : 'index, follow, max-image-preview:large';
 ---
 
 <!doctype html>
 <html lang="nl">
-    <head>
-        <meta charset="UTF-8" />
+  <head>
+    <meta charset="UTF-8" />
 
-        <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1"
-        />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    />
 
-        <meta
-            name="description"
-            content={description}
-        />
+    <meta
+      name="theme-color"
+      content="#f7f4ee"
+    />
 
-        <meta
-            name="theme-color"
-            content="#f7f4ee"
-        />
+    <!-- Algemene SEO -->
 
-        <link
-            rel="icon"
-            type="image/svg+xml"
-            href={internalPath('favicon.svg')}
-        />
+    <title>{pageTitle}</title>
 
-        <title>{pageTitle}</title>
-    </head>
+    <meta
+      name="description"
+      content={description}
+    />
 
-    <body>
-        <Header />
+    <meta
+      name="robots"
+      content={robotsContent}
+    />
 
-        <main id="main-content">
-            <slot />
-        </main>
+    <link
+      rel="canonical"
+      href={canonical}
+    />
 
-        <Footer />
-    </body>
+    <!-- Open Graph -->
+
+    <meta
+      property="og:type"
+      content={type}
+    />
+
+    <meta
+      property="og:locale"
+      content="nl_NL"
+    />
+
+    <meta
+      property="og:site_name"
+      content={siteName}
+    />
+
+    <meta
+      property="og:title"
+      content={pageTitle}
+    />
+
+    <meta
+      property="og:description"
+      content={description}
+    />
+
+    <meta
+      property="og:url"
+      content={canonical}
+    />
+
+    <!-- Twitter / X Cards -->
+
+    <meta
+      name="twitter:card"
+      content="summary"
+    />
+
+    <meta
+      name="twitter:title"
+      content={pageTitle}
+    />
+
+    <meta
+      name="twitter:description"
+      content={description}
+    />
+
+    <!-- Favicon -->
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href={internalPath('favicon.svg')}
+    />
+  </head>
+
+  <body>
+    <Header />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+  </body>
 </html>
