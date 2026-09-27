@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArrowIcon from '../../components/ArrowIcon.astro';
 
 const email = 'geertjanknapen+portfolio@gmail.com';
 
@@ -54,7 +55,7 @@ const socialLinks = [
         </div>
 
         <span class="hero-decoration" aria-hidden="true">
-          ↗
+          <ArrowIcon size={112} strokeWidth={1.2} />
         </span>
       </div>
     </div>
@@ -81,7 +82,7 @@ const socialLinks = [
           <span class="card-label">Direct contact</span>
 
           <span class="card-icon" aria-hidden="true">
-            ↗
+            <ArrowIcon size={24} />
           </span>
         </div>
 
@@ -100,7 +101,7 @@ const socialLinks = [
           <a class="email-button" href={mailto}>
             Open je mailprogramma
 
-            <span aria-hidden="true">↗</span>
+            <ArrowIcon size={20} />
           </a>
         </div>
 
@@ -148,11 +149,8 @@ const socialLinks = [
                   {social.number} /
                 </span>
 
-                <span
-                  class="social-arrow"
-                  aria-hidden="true"
-                >
-                  ↗
+                <span class="social-arrow" aria-hidden="true">
+                  <ArrowIcon size={26} />
                 </span>
               </div>
 
@@ -165,9 +163,7 @@ const socialLinks = [
               <span class="social-action">
                 {social.action}
 
-                <span aria-hidden="true">
-                  ↗
-                </span>
+                <ArrowIcon size={20} />
               </span>
             </a>
           ))
@@ -236,6 +232,7 @@ const socialLinks = [
   }
 
   .hero-decoration {
+    display: flex;
     flex-shrink: 0;
     color: var(--color-brick);
     font-size: clamp(5rem, 12vw, 10rem);
