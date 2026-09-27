@@ -1,10 +1,12 @@
 ---
+import ArrowIcon from './ArrowIcon.astro';
+
 interface Props {
-    title: string;
-    description: string;
-    tags: string[];
-    href: string;
-    number?: string;
+  title: string;
+  description: string;
+  tags: string[];
+  href: string;
+  number?: string;
 }
 
 const {
@@ -17,24 +19,31 @@ const {
 ---
 
 <article class="project-card">
-    <a href={href}>
-        <div class="project-header">
-            {number && <span class="project-number">{number}</span>}
+  <a href={href}>
+    <div class="project-header">
+      {number && (
+        <span class="project-number">{number}</span>
+      )}
 
-            <span class="project-arrow" aria-hidden="true">↗</span>
-        </div>
+      <span class="project-arrow">
+        <ArrowIcon size={26} />
+      </span>
+    </div>
 
-        <div class="project-content">
-            <h3>{title}</h3>
+    <div class="project-content">
+      <h3>{title}</h3>
 
-            <p>{description}</p>
-            <ul aria-label={`Tech stack van ${title}`}>
-                {tags.map((tag) => (
-                    <li>{tag}</li>
-                ))}
-            </ul>
-        </div>
-    </a>
+      <p>{description}</p>
+
+      <ul aria-label={`Tech stack van ${title}`}>
+        {
+          tags.map((tag) => (
+            <li>{tag}</li>
+          ))
+        }
+      </ul>
+    </div>
+  </a>
 </article>
 
 <style>
@@ -70,6 +79,7 @@ const {
 
   .project-arrow {
     display: none;
+    color: var(--color-brick);
   }
 
   h3 {
@@ -107,7 +117,9 @@ const {
     }
 
     .project-arrow {
-      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .project-card > a:hover {

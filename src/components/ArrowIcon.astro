@@ -1,0 +1,45 @@
+---
+interface Props {
+  direction?: 'up-right' | 'right' | 'left' | 'down' | 'up';
+  size?: number;
+  strokeWidth?: number;
+  class?: string;
+}
+
+const {
+  direction = 'up-right',
+  size = 24,
+  strokeWidth = 1.8,
+  class: className,
+} = Astro.props;
+
+const rotations = {
+  'up-right': 0,
+  right: 45,
+  left: 225,
+  down: 135,
+  up: 315,
+};
+
+const rotation = rotations[direction];
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width={strokeWidth}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  aria-hidden="true"
+  focusable="false"
+>
+  <g transform={`rotate(${rotation} 12 12)`}>
+    <path d="M7 17 17 7" />
+    <path d="M8 7h9v9" />
+  </g>
+</svg>

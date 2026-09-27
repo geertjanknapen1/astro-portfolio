@@ -1,0 +1,573 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const email = 'geertjanknapen+portfolio@gmail.com';
+
+const linkedin = 'https://www.linkedin.com/in/geert-jan-knapen/';
+
+const github = 'https://github.com/geertjanknapen1';
+
+const subject = 'Contact via portfolio';
+
+const mailto = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+
+const socialLinks = [
+  {
+    number: '01',
+    name: 'LinkedIn',
+    description:
+      'Mijn professionele achtergrond, ervaring en netwerk.',
+    url: linkedin,
+    action: 'Bekijk mijn profiel',
+  },
+  {
+    number: '02',
+    name: 'GitHub',
+    description:
+      'Een kijkje in mijn repositories en projecten.',
+    url: github,
+    action: 'Bekijk mijn code',
+  },
+];
+---
+
+<BaseLayout
+  title="Contact"
+  description="Neem contact op met Geert-Jan Knapen via e-mail, LinkedIn of GitHub."
+>
+  <section class="contact-hero">
+    <div class="container">
+      <p class="eyebrow">Contact / 04</p>
+
+      <div class="hero-layout">
+        <div class="hero-content">
+          <h1>
+            Goed idee?<br />
+            <em>Laat horen.</em>
+          </h1>
+
+          <p class="hero-description">
+            Een interessante uitdaging, een vraag over mijn werk
+            of gewoon zin om eens kennis te maken?
+            Mijn digitale deur staat open.
+          </p>
+        </div>
+
+        <span class="hero-decoration" aria-hidden="true">
+          ↗
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section">
+    <div class="container contact-layout">
+      <div class="section-intro">
+        <span class="section-number">01 /</span>
+
+        <h2>
+          Gewoon even<br />
+          <em>een berichtje.</em>
+        </h2>
+
+        <p>
+          Geen formulieren, accounts of ingewikkelde stappen.
+          Een e-mailtje is genoeg.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <div class="card-heading">
+          <span class="card-label">Direct contact</span>
+
+          <span class="card-icon" aria-hidden="true">
+            ↗
+          </span>
+        </div>
+
+        <div class="card-content">
+          <p class="card-eyebrow">
+            Je vindt me in mijn inbox.
+          </p>
+
+          <h3>Stuur me een mail.</h3>
+
+          <p>
+            Vertel me waar je mee bezig bent,
+            wat je wilt weten of wat je idee is.
+          </p>
+
+          <a class="email-button" href={mailto}>
+            Open je mailprogramma
+
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="card-footer">
+          <span>E-mail</span>
+
+          <a href={mailto}>
+            {email}
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="social-section">
+    <div class="container">
+      <div class="social-heading">
+        <div>
+          <p class="eyebrow">02 / Online</p>
+
+          <h2>
+            Liever even<br />
+            <em>rondkijken?</em>
+          </h2>
+        </div>
+
+        <p>
+          Je vindt me ook op deze plekken.
+          Neem gerust een kijkje.
+        </p>
+      </div>
+
+      <div class="social-grid">
+        {
+          socialLinks.map((social) => (
+            <a
+              class="social-card"
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${social.name} - ${social.action} (opent in een nieuw tabblad)`}
+            >
+              <div class="social-card-top">
+                <span class="social-number">
+                  {social.number} /
+                </span>
+
+                <span
+                  class="social-arrow"
+                  aria-hidden="true"
+                >
+                  ↗
+                </span>
+              </div>
+
+              <div class="social-card-content">
+                <h3>{social.name}</h3>
+
+                <p>{social.description}</p>
+              </div>
+
+              <span class="social-action">
+                {social.action}
+
+                <span aria-hidden="true">
+                  ↗
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="closing-section">
+    <div class="container">
+      <div class="closing-content">
+        <span class="eyebrow">Tot snel?</span>
+
+        <p>
+          De mooiste dingen beginnen
+          soms met een simpel
+          <em>hallo.</em>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero */
+
+  .contact-hero {
+    padding-block:
+      clamp(4rem, 9vw, 8rem)
+      clamp(5rem, 10vw, 9rem);
+  }
+
+  .hero-layout {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-top: clamp(2rem, 5vw, 4rem);
+  }
+
+  .hero-content {
+    max-width: 850px;
+    min-width: 0;
+  }
+
+  h1 {
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(4rem, 11vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.065em;
+  }
+
+  h1 em {
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-weight: 500;
+  }
+
+  .hero-description {
+    max-width: 640px;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+    line-height: 1.6;
+  }
+
+  .hero-decoration {
+    flex-shrink: 0;
+    color: var(--color-brick);
+    font-size: clamp(5rem, 12vw, 10rem);
+    line-height: 1;
+  }
+
+  /* Contact */
+
+  .contact-section {
+    padding-block: clamp(5rem, 10vw, 9rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 0.9fr)
+      minmax(0, 1.1fr);
+    align-items: start;
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-intro {
+    max-width: 400px;
+  }
+
+  .section-number {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+  }
+
+  h2 em {
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-weight: 500;
+  }
+
+  .section-intro p {
+    max-width: 340px;
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  /* E-mailkaart */
+
+  .contact-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 460px;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-sand);
+  }
+
+  .card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .card-label,
+  .card-eyebrow {
+    color: var(--color-brick);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .card-icon {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-brick);
+    font-size: 1.5rem;
+  }
+
+  .card-content {
+    margin-block: auto;
+    padding-block: 3rem;
+  }
+
+  .card-content h3 {
+    margin-block: 1rem 1.5rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .card-content > p:not(.card-eyebrow) {
+    max-width: 360px;
+    margin-bottom: 2rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .email-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 52px;
+    padding: 0.85rem 1.25rem;
+    border: 1px solid var(--color-brick);
+    border-radius: 8px;
+    background: var(--color-brick);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition:
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .email-button:hover {
+    background: #87352c;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .email-button span {
+    font-size: 1.2rem;
+  }
+
+  .card-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 1rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.85rem;
+  }
+
+  .card-footer > span {
+    color: var(--color-muted);
+  }
+
+  .card-footer a {
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  /* Sociale profielen */
+
+  .social-section {
+    padding-block: clamp(5rem, 10vw, 9rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .social-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .social-heading h2 {
+    margin-bottom: 0;
+  }
+
+  .social-heading > p {
+    max-width: 280px;
+    margin-bottom: 0.5rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .social-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .social-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 3rem;
+    min-height: 340px;
+    padding: clamp(1.5rem, 4vw, 3rem);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    transition:
+      border-color 180ms ease,
+      background 180ms ease,
+      transform 180ms ease;
+  }
+
+  .social-card:hover {
+    border-color: var(--color-brick);
+    background: var(--color-sand);
+    color: var(--color-ink);
+    transform: translateY(-3px);
+  }
+
+  .social-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .social-number {
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+  }
+
+  .social-arrow {
+    color: var(--color-brick);
+    font-size: 1.5rem;
+  }
+
+  .social-card-content h3 {
+    margin-bottom: 1rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -0.05em;
+  }
+
+  .social-card-content p {
+    max-width: 350px;
+    margin: 0;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .social-action {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-brick);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+
+  .social-action span {
+    font-size: 1.2rem;
+  }
+
+  /* Afsluiting */
+
+  .closing-section {
+    padding-block: clamp(5rem, 10vw, 9rem);
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  .closing-content {
+    max-width: 850px;
+  }
+
+  .closing-content .eyebrow {
+    color: #e2a99e;
+  }
+
+  .closing-content p {
+    margin: 2rem 0 0;
+    font-size: clamp(2.5rem, 6vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.045em;
+  }
+
+  .closing-content em {
+    color: #e2a99e;
+    font-family: var(--font-accent);
+    font-weight: 500;
+  }
+
+  /* Responsive */
+
+  @media (max-width: 800px) {
+    .contact-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .section-intro {
+      max-width: 600px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-decoration {
+      display: none;
+    }
+
+    .contact-card {
+      min-height: 420px;
+    }
+
+    .email-button {
+      width: 100%;
+    }
+
+    .social-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .social-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .social-card {
+      min-height: 280px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .email-button,
+    .social-card {
+      transition: none;
+    }
+
+    .email-button:hover,
+    .social-card:hover {
+      transform: none;
+    }
+  }
+</style>
