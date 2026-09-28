@@ -14,87 +14,42 @@ tags:
 coverImage: "images/projects/pact/pact-mockup.png"
 coverAlt: "Conceptvisualisatie van Pact op een laptop."
 coverCaption: "AI-gegenereerde conceptmockup van Pact, gebaseerd op het productontwerp en de geplande functionaliteiten. De afbeelding dient ter illustratie van de beoogde gebruikersinterface en is geen weergave van de daadwerkelijk ontwikkelde applicatie."
+technicalIntro: "Bij Pact kan ik de technische keuzes zelf maken. Ik kies bewust voor een vertrouwde basis, zodat ik mijn aandacht kan richten op architectuur, betrouwbaarheid en de goedkeuringsworkflow."
+technicalChoices:
+  - title: "Symfony & PHP"
+    description: "Symfony geeft me een duidelijke structuur voor de verschillende onderdelen van de applicatie. Met onder andere de Workflow-component kan ik expliciet vastleggen welke overgangen een scope mag doorlopen. Zelf vindt ik Symfony een van de meest volwassen frameworks, vandaar dat de keuze vrij snel op Symfony viel."
+  - title: "PostgreSQL"
+    description: "Gebruikers, klanten, scopes en goedkeuringen hangen met elkaar samen. Een relationele database past bij die gegevens en helpt me hun onderlinge relaties zorgvuldig vast te leggen."
+  - title: "Docker"
+    description: "Ik gebruik Docker om de ontwikkelomgeving reproduceerbaar te houden. Zo draaien de applicatie en de bijbehorende diensten in een consistente omgeving. Verder geeft deze keuze me ook de mogelijkheid om nog zelfverzekerder te worden met het opzetten van Docker omgevingen."
+  - title: "Geautomatiseerde tests"
+    description: "Een goedkeuringsproces moet voorspelbaar zijn: niet iedere actie mag in iedere status worden uitgevoerd. Met tests controleer ik die regels en verklein ik de kans op regressies wanneer ik nieuwe functionaliteit toevoeg."
 ---
 
 ## Van idee naar applicatie
 
-Naast mijn dagelijkse werk vind ik het leuk om
-zelf software te ontwikkelen. Niet omdat er een
-klant op zit te wachten, maar omdat ik graag
-nieuwe dingen leer en mezelf technisch wil
-blijven uitdagen.
+Naast mijn dagelijkse werk vind ik het leuk om zelf software te ontwikkelen. Niet omdat er een klant op zit te wachten, maar omdat ik graag nieuwe dingen leer en mezelf technisch wil blijven uitdagen.
 
 Pact is zo'n project.
 
-Het idee is eenvoudig: een applicatie waarmee
-freelancers en kleine bureaus de scope van hun
-projecten kunnen vastleggen en door klanten
-kunnen laten goedkeuren.
+Het idee is eenvoudig: een applicatie waarmee freelancers en kleine bureaus de scope van hun projecten kunnen vastleggen en door klanten kunnen laten goedkeuren.
 
-Daarmee wil ik een herkenbaar probleem
-aanpakken: onduidelijkheid over wat er precies
-binnen een project valt.
-
+Daarmee wil ik een herkenbaar probleem aanpakken: onduidelijkheid over wat er precies binnen een project valt.
 
 ## Meer dan alleen functionaliteit
 
-Met Pact geef ik mezelf bewust een realistische
-casus. Ik wil niet zomaar wat losse functionaliteiten
-bouwen, maar ervaren wat er komt kijken bij het
-ontwikkelen van een complete SaaS-applicatie.
+Met Pact geef ik mezelf bewust een realistische casus. Ik wil niet zomaar wat losse functionaliteiten bouwen, maar ervaren wat er komt kijken bij het ontwikkelen van een complete SaaS-applicatie.
 
-Juist doordat het project een realistisch probleem
-oplost, word ik gedwongen om verder te kijken
-dan alleen de code die ik op dat moment schrijf.
+Juist doordat het project een realistisch probleem oplost, word ik gedwongen om verder te kijken dan alleen de code die ik op dat moment schrijf.
 
-Hoe richt ik de architectuur in? Hoe zorg ik
-ervoor dat de applicatie onderhoudbaar blijft?
-En hoe maak ik technische keuzes die ook
-standhouden wanneer het project groeit?
+Hoe richt ik de architectuur in? Hoe zorg ik ervoor dat de applicatie onderhoudbaar blijft? En hoe maak ik technische keuzes die ook standhouden wanneer het project groeit?
 
-Door mezelf deze uitdagingen te geven, kan ik
-me verder verdiepen in Symfony, softwarearchitectuur
-en het volledige ontwikkelproces.
-
-## Achter de schermen
-
-De backend ontwikkel ik met Symfony en PHP,
-met PostgreSQL als database.
-
-Docker gebruik ik om de ontwikkelomgeving
-consistent en reproduceerbaar te houden.
-
-Een belangrijk onderdeel van Pact is de
-goedkeuringsworkflow.
-
-Een gebruiker kan een projectscope
-samenstellen en deze naar een klant sturen.
-De klant krijgt vervolgens de mogelijkheid
-om de scope goed te keuren of wijzigingen
-aan te vragen.
-
-Daarbij moet de applicatie zorgvuldig
-omgaan met de verschillende statussen
-van een scope en de acties die op ieder
-moment zijn toegestaan.
-
-Ook besteed ik aandacht aan
-geautomatiseerde tests. Daarmee kan ik
-controleren of de applicatie zich blijft
-gedragen zoals bedoeld wanneer ik nieuwe
-functionaliteit toevoeg.
+Door mezelf deze uitdagingen te geven, kan ik me verder verdiepen in Symfony, softwarearchitectuur en het volledige ontwikkelproces.
 
 ## Een project om van te leren
 
 Pact is nog volop in ontwikkeling.
 
-Juist dat maakt het voor mij een
-interessant project. Ik heb de vrijheid
-om technische keuzes te onderzoeken,
-nieuwe ideeën uit te proberen en
-onderweg bij te leren.
+Juist dat maakt het voor mij een interessant project. Ik heb de vrijheid om technische keuzes te onderzoeken, nieuwe ideeën uit te proberen en onderweg bij te leren.
 
-Het doel is niet om zo snel mogelijk
-een product af te leveren, maar om
-iets te bouwen waar ik technisch
-achter sta.
+Het doel is niet om zo snel mogelijk een product af te leveren, maar om iets te bouwen waar ik technisch achter sta.
