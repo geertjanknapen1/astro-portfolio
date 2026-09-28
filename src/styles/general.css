@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap');
 
 :root {
   font-family: 'DM Sans', sans-serif;
@@ -25,7 +25,7 @@
   --color-closing-accent: #d6b38b;
 
   --font-body: 'DM Sans', sans-serif;
-  --font-accent: 'Fraunces', Georgia, serif;
+  --font-accent: 'EB Garamond', cursive;
 
   --container-width: 1120px;
   --page-padding: clamp(1.25rem, 5vw, 3rem);
