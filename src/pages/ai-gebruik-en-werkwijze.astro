@@ -1,0 +1,239 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowIcon from '../components/ArrowIcon.astro';
+import { internalPath } from '../utils/paths';
+---
+
+<BaseLayout
+  title="AI & mijn werkwijze"
+  description="Hoe ik kunstmatige intelligentie gebruik bij het ontwikkelen van software en mijn portfolio."
+>
+  <main>
+    <header class="page-header">
+      <div class="container">
+        <p class="eyebrow">Transparantie</p>
+        <h1>AI & mijn <span>werkwijze.</span></h1>
+        <p class="intro">
+          Een hulpmiddel, geen vervanging van mijn eigen
+          kennis, ervaring of verantwoordelijkheid.
+        </p>
+      </div>
+    </header>
+
+    <section class="content-section">
+      <div class="container content-layout">
+        <aside class="section-label">
+          <span>01 /</span> Mijn aanpak
+        </aside>
+
+        <div class="content">
+          <h2>Open over AI<span>.</span></h2>
+
+          <p>
+            Als developer kun je niet stil blijven staan, ook niet op gebied van kunstmatige intelligentie (AI).
+            Na een periode van twijfel over hoe AI te integreren in mijn werkwijze, mede door de kwaliteit van de models destijds, heeft het even geduurd voordat ik AI omarmde.
+          </p>
+
+          <p>
+            Tegenwoordig maak ik echter, net als veel andere developers, gebruik van moderne hulpmiddelen. Waaronder ook AI.
+            Ik vind het belangrijk daar open en transparant over te zijn aangezien AI een steeds groter onderdeel van het developers-vak is en gaat worden.
+          </p>
+
+          <p>
+            AI is voor mij een hulpmiddel, geen vervanging voor
+            mijn eigen kennis, ervaring of verantwoordelijkheid.
+          </p>
+
+          <h3>Hoe ik AI gebruik</h3>
+
+          <p>
+            Ik gebruik AI waar het mijn werk kan ondersteunen.
+            Denk bijvoorbeeld aan het verkennen van technische
+            mogelijkheden, het helpen bij architectuurkeuzes,
+            het opsporen van fouten, het controlleren van code op best-practices en het aanscherpen van teksten.
+          </p>
+
+          <p>
+            Dat betekent niet dat ik suggesties automatisch
+            overneem. Ik wil begrijpen wat ik bouw en waarom
+            bepaalde keuzes worden gemaakt.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section alternate">
+      <div class="container content-layout">
+        <aside class="section-label">
+          <span>02 /</span> Mijn projecten
+        </aside>
+
+        <div class="content">
+          <h2>Het werk blijft van mij<span>.</span></h2>
+
+          <p>
+            De projecten op deze website zijn bedoeld om mijn
+            ervaring, werkzaamheden en technische inzichten
+            te laten zien.
+          </p>
+
+          <p>
+            Bij professionele projecten maak ik onderscheid
+            tussen mijn eigen bijdrage en het werk van collega's.
+            AI-gebruik verandert niets aan dat onderscheid.
+          </p>
+
+          <p>
+            Ook bij het ontwikkelen van deze portfoliowebsite
+            is AI ingezet als ondersteuning bij bijvoorbeeld
+            het opschonen van code, best practices omtrent Astro, vormgeving en de teksten op deze website.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <div class="container content-layout">
+        <aside class="section-label">
+          <span>03 /</span> Verantwoordelijkheid
+        </aside>
+
+        <div class="content">
+          <h2>Zelf blijven nadenken<span>.</span></h2>
+
+          <p>
+            AI kan fouten maken, onjuiste informatie geven of
+            oplossingen voorstellen die niet geschikt zijn
+            voor een specifieke situatie.
+          </p>
+
+          <p>
+            Daarom blijft het beoordelen van suggesties,
+            het maken van technische keuzes en het controleren
+            van het uiteindelijke resultaat mijn eigen
+            verantwoordelijkheid.
+          </p>
+
+          <blockquote>
+            AI helpt me bij het bouwen. Het neemt mijn
+            verantwoordelijkheid niet over.
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+        <section class="closing-section" aria-labelledby="closing-heading">
+          <div class="container closing-content">
+            <p class="eyebrow">04 / Het developers vak</p>
+            <h2 id="closing-heading">Verder praten over<br /><em>AI en de toekomst van het vak?</em></h2>
+            <p>Wil je mijn visie over AI horen of je eigen ervaring of mening over de inzet en het gebruik van AI delen?</p>
+            <a class="button" href={internalPath('contact/')}>
+              Neem dan contact op <ArrowIcon size={20} />
+            </a>
+          </div>
+        </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .page-header {
+    padding-block: clamp(5rem, 10vw, 10rem);
+  }
+
+  h1 {
+    max-width: 900px;
+    margin-block: 1.5rem 2rem;
+    font-size: clamp(3.5rem, 9vw, 8rem);
+    line-height: 1;
+    letter-spacing: -0.065em;
+  }
+
+  h1 span,
+  h2 span {
+    color: var(--color-brick);
+  }
+
+  .intro {
+    max-width: 700px;
+    color: var(--color-muted);
+    font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+    line-height: 1.6;
+  }
+
+  .content-section {
+    padding-block: clamp(4rem, 9vw, 9rem);
+    border-top: 1px solid var(--color-border);
+  }
+
+  .alternate {
+    background: var(--color-sand);
+  }
+
+  .content-layout {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 7rem);
+  }
+
+  .section-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding-top: 0.4rem;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+
+  .section-label span {
+    color: var(--color-brick);
+    white-space: nowrap;
+  }
+
+  .content {
+    max-width: 760px;
+    min-width: 0;
+  }
+
+  h2 {
+    margin: 0 0 2rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+  }
+
+  h3 {
+    margin-block: 3rem 1rem;
+    font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+  }
+
+  .content p {
+    margin-bottom: 1.75rem;
+    color: var(--color-muted);
+    font-size: clamp(1.05rem, 1.6vw, 1.15rem);
+    line-height: 1.9;
+  }
+
+  .closing-section { padding-block: clamp(6rem, 11vw, 10rem); background: var(--color-closing-background); color: var(--color-closing-text); }
+  .closing-content { max-width: 1050px; }
+  .closing-content .eyebrow, .closing-content h2 em { color: var(--color-closing-accent); }
+  .closing-content h2 { margin-block: 2rem 3rem; font-size: clamp(3.5rem, 8vw, 7rem); }
+  .closing-content > p:not(.eyebrow) { max-width: 630px; margin-bottom: 2rem; font-size: 1.15rem; line-height: 1.8; }
+  .closing-content .button { gap: 1rem; }
+
+  blockquote {
+    margin: 3rem 0 0;
+    padding: 0.5rem 0 0.5rem 2rem;
+    border-left: 3px solid var(--color-brick);
+    font-family: var(--font-accent);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 760px) {
+    .content-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+</style>

@@ -1,5 +1,6 @@
-
 ---
+import { internalPath } from '../utils/paths';
+
 const year = new Date().getFullYear();
 ---
 
@@ -8,12 +9,17 @@ const year = new Date().getFullYear();
     <div>
       <p class="footer-title">Tot zover de voorkant.</p>
       <p>
-        Met aandacht gebouwd door Geert-Jan.
-        En ja, ook de achterkant werkt.
+        Met aandacht en ❤️ gebouwd door Geert-Jan.
       </p>
     </div>
 
-    <span>© {year} Geert-Jan Knapen</span>
+    <div class="footer-meta">
+      <a href={internalPath('ai-gebruik-en-werkwijze/')}>
+        AI & mijn werkwijze
+      </a>
+
+      <span>© {year} Geert-Jan Knapen</span>
+    </div>
   </div>
 </footer>
 
@@ -37,7 +43,8 @@ const year = new Date().getFullYear();
   }
 
   p,
-  span {
+  span,
+  a {
     color: var(--color-muted);
     font-size: 0.875rem;
   }
@@ -46,10 +53,39 @@ const year = new Date().getFullYear();
     margin-bottom: 0;
   }
 
+  .footer-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 1.5rem;
+  }
+
+  .footer-meta a {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 180ms ease;
+  }
+
+  .footer-meta a:hover {
+    color: var(--color-brick);
+  }
+
   @media (max-width: 600px) {
     .footer-inner {
       align-items: start;
       flex-direction: column;
+    }
+
+    .footer-meta {
+      justify-content: flex-start;
+      gap: 1rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .footer-meta a {
+      transition: none;
     }
   }
 </style>
