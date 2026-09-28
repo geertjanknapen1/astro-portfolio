@@ -11,6 +11,8 @@ tags:
   - PHP
   - PostgreSQL
   - Docker
+coverImage: "images/projects/pact/pact-mockup.png"
+coverCaption: "AI-gegenereerde conceptmockup van Pact, gebaseerd op het productontwerp en de geplande functionaliteiten. De afbeelding dient ter illustratie van de beoogde gebruikersinterface en is geen weergave van de daadwerkelijk ontwikkelde applicatie."
 ---
 
 ## Van idee naar applicatie

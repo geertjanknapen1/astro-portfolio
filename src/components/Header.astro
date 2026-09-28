@@ -43,7 +43,6 @@ const isHome = isCurrentPage(homePath);
       GJK<span>.</span>
     </a>
 
-    <!-- Desktopnavigatie -->
     <nav
       class="desktop-navigation"
       aria-label="Hoofdnavigatie"
@@ -72,7 +71,19 @@ const isHome = isCurrentPage(homePath);
       </ul>
     </nav>
 
-    <!-- Mobiele navigatie -->
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      type="button"
+      aria-label="Thema: automatisch. Klik voor licht thema."
+      title="Thema wijzigen"
+    >
+      <span class="theme-symbol" aria-hidden="true">
+        ◐
+      </span>
+      <span id="theme-label">Auto</span>
+    </button>
+
     <details
       class="mobile-navigation"
       id="mobile-menu"
@@ -137,6 +148,144 @@ const isHome = isCurrentPage(homePath);
 </header>
 
 <script>
+  type ThemePreference =
+    | 'auto'
+    | 'light'
+    | 'dark';
+
+  const storageKey = 'portfolio-theme';
+  const root = document.documentElement;
+
+  const themeToggle =
+    document.querySelector<HTMLButtonElement>(
+      '#theme-toggle'
+    );
+
+  const themeLabel =
+    document.querySelector<HTMLElement>(
+      '#theme-label'
+    );
+
+  const systemTheme = window.matchMedia(
+    '(prefers-color-scheme: dark)'
+  );
+
+  const themeNames: Record<
+    ThemePreference,
+    string
+  > = {
+    auto: 'Auto',
+    light: 'Licht',
+    dark: 'Donker',
+  };
+
+  const nextTheme: Record<
+    ThemePreference,
+    ThemePreference
+  > = {
+    auto: 'light',
+    light: 'dark',
+    dark: 'auto',
+  };
+
+  function getPreference(): ThemePreference {
+    const value = root.dataset.themePreference;
+
+    if (
+      value === 'light' ||
+      value === 'dark'
+    ) {
+      return value;
+    }
+
+    return 'auto';
+  }
+
+  function applyTheme(
+    preference: ThemePreference
+  ): void {
+    const effectiveTheme =
+      preference === 'auto'
+        ? systemTheme.matches
+          ? 'dark'
+          : 'light'
+        : preference;
+
+    root.dataset.theme = effectiveTheme;
+    root.dataset.themePreference = preference;
+
+    if (themeLabel) {
+      themeLabel.textContent =
+        themeNames[preference];
+    }
+
+    if (themeToggle) {
+      const next = nextTheme[preference];
+
+      themeToggle.setAttribute(
+        'aria-label',
+        `Thema: ${
+          preference === 'auto'
+            ? 'automatisch'
+            : preference === 'light'
+              ? 'licht'
+              : 'donker'
+        }. Klik voor ${
+          next === 'auto'
+            ? 'automatisch thema'
+            : next === 'light'
+              ? 'licht thema'
+              : 'donker thema'
+        }.`
+      );
+    }
+
+    document
+      .querySelector<HTMLMetaElement>(
+        'meta[name="theme-color"]'
+      )
+      ?.setAttribute(
+        'content',
+        effectiveTheme === 'dark'
+          ? '#1c1815'
+          : '#f7f4ee'
+      );
+  }
+
+  applyTheme(getPreference());
+
+  themeToggle?.addEventListener(
+    'click',
+    () => {
+      const preference =
+        nextTheme[getPreference()];
+
+      try {
+        if (preference === 'auto') {
+          localStorage.removeItem(storageKey);
+        } else {
+          localStorage.setItem(
+            storageKey,
+            preference
+          );
+        }
+      } catch {
+        // De keuze blijft werken tijdens dit bezoek.
+      }
+
+      applyTheme(preference);
+    }
+  );
+
+  systemTheme.addEventListener(
+    'change',
+    () => {
+      if (getPreference() === 'auto') {
+        applyTheme('auto');
+      }
+    }
+  );
+
   const mobileMenu =
     document.querySelector<HTMLDetailsElement>(
       '#mobile-menu'
@@ -212,12 +361,12 @@ const isHome = isCurrentPage(homePath);
     padding: 0.75rem 1rem;
     border-radius: 0 0 8px 8px;
     background: var(--color-ink);
-    color: white;
+    color: var(--color-paper);
   }
 
   .skip-link:focus {
     top: 0;
-    color: white;
+    color: var(--color-paper);
   }
 
   .site-header {
@@ -256,6 +405,10 @@ const isHome = isCurrentPage(homePath);
     height: 2px;
     background: var(--color-brick);
     content: '';
+  }
+
+  .desktop-navigation {
+    margin-left: auto;
   }
 
   .desktop-navigation ul {
@@ -301,17 +454,60 @@ const isHome = isCurrentPage(homePath);
     color: var(--color-brick);
   }
 
+  .theme-toggle {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    min-width: 80px;
+    min-height: 44px;
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--color-control-border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink);
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+
+  .theme-toggle:hover {
+    border-color: var(--color-brick);
+    color: var(--color-brick);
+  }
+
+  .theme-symbol {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+
   .mobile-navigation {
     display: none;
+  }
+
+  @media (max-width: 900px) and (min-width: 761px) {
+    .header-inner {
+      gap: 1rem;
+    }
+
+    .desktop-navigation ul {
+      gap: 0.5rem 0.8rem;
+    }
   }
 
   @media (max-width: 760px) {
     .header-inner {
       min-height: 76px;
+      gap: 0.5rem;
     }
 
     .desktop-navigation {
       display: none;
+    }
+
+    .theme-toggle {
+      margin-left: auto;
     }
 
     .mobile-navigation {
@@ -401,7 +597,7 @@ const isHome = isCurrentPage(homePath);
       border-bottom: 1px solid var(--color-border);
       background: var(--color-paper);
       box-shadow:
-        0 18px 30px rgba(41, 39, 36, 0.07);
+        0 18px 30px var(--color-menu-shadow);
     }
 
     .mobile-menu-panel ul {
@@ -477,6 +673,16 @@ const isHome = isCurrentPage(homePath);
   }
 
   @media (max-width: 380px) {
+    .theme-toggle {
+      min-width: 68px;
+      padding-inline: 0.5rem;
+    }
+
+    .menu-toggle {
+      gap: 0.5rem;
+      padding-inline: 0.75rem;
+    }
+
     .mobile-menu-panel a {
       grid-template-columns:
         1.5rem minmax(0, 1fr) auto;

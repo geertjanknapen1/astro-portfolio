@@ -1,10 +1,7 @@
-
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@1,9..144,500&display=swap');
 
 :root {
   font-family: 'DM Sans', sans-serif;
-  color: #292724;
-  background: #f7f4ee;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 
@@ -16,11 +13,74 @@
   --color-border: #ded7cc;
   --color-control-border: #81776e;
 
+  --color-button: #a13e33;
+  --color-button-hover: #87352c;
+  --color-button-text: #ffffff;
+  --color-selection-text: #ffffff;
+  --color-menu-shadow: rgba(41, 39, 36, 0.07);
+
+  /* Afsluitende sectie van de contactpagina */
+  --color-closing-background: #292724;
+  --color-closing-text: #f7f4ee;
+  --color-closing-accent: #d6b38b;
+
   --font-body: 'DM Sans', sans-serif;
   --font-accent: 'Fraunces', Georgia, serif;
 
   --container-width: 1120px;
   --page-padding: clamp(1.25rem, 5vw, 3rem);
+
+  color: var(--color-ink);
+  background: var(--color-paper);
+  color-scheme: light;
+}
+
+/* Klassiek Bruin */
+:root[data-theme='dark'] {
+  --color-paper: #1c1815;
+  --color-ink: #f5efe7;
+  --color-brick: #c7a58e;
+  --color-sand: #302721;
+  --color-muted: #cbbdb0;
+  --color-border: #635247;
+  --color-control-border: #a68a73;
+
+  --color-button: #765743;
+  --color-button-hover: #604432;
+  --color-button-text: #ffffff;
+  --color-selection-text: #1c1815;
+  --color-menu-shadow: rgba(0, 0, 0, 0.25);
+
+  --color-closing-background: #302721;
+  --color-closing-text: #f5efe7;
+  --color-closing-accent: #d8b59b;
+
+  color-scheme: dark;
+}
+
+/* Systeemvoorkeur zonder JavaScript */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-paper: #1c1815;
+    --color-ink: #f5efe7;
+    --color-brick: #c7a58e;
+    --color-sand: #302721;
+    --color-muted: #cbbdb0;
+    --color-border: #635247;
+    --color-control-border: #a68a73;
+
+    --color-button: #765743;
+    --color-button-hover: #604432;
+    --color-button-text: #ffffff;
+    --color-selection-text: #1c1815;
+    --color-menu-shadow: rgba(0, 0, 0, 0.25);
+
+    --color-closing-background: #302721;
+    --color-closing-text: #f5efe7;
+    --color-closing-accent: #d8b59b;
+
+    color-scheme: dark;
+  }
 }
 
 * {
@@ -34,6 +94,8 @@ html {
 body {
   min-width: 320px;
   margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
   line-height: 1.6;
 }
 
@@ -91,7 +153,7 @@ h3 {
 }
 
 ::selection {
-  color: white;
+  color: var(--color-selection-text);
   background: var(--color-brick);
 }
 
@@ -117,10 +179,10 @@ h3 {
   justify-content: center;
   min-height: 48px;
   padding: 0.75rem 1.25rem;
-  border: 1px solid var(--color-brick);
+  border: 1px solid var(--color-button);
   border-radius: 8px;
-  background: var(--color-brick);
-  color: white;
+  background: var(--color-button);
+  color: var(--color-button-text);
   font-weight: 600;
   transition:
     background 150ms ease,
@@ -128,8 +190,8 @@ h3 {
 }
 
 .button:hover {
-  background: #87352c;
-  color: white;
+  background: var(--color-button-hover);
+  color: var(--color-button-text);
   transform: translateY(-2px);
 }
 
@@ -141,6 +203,52 @@ h3 {
 .button--outline:hover {
   background: var(--color-sand);
   color: var(--color-ink);
+}
+
+/*
+ * Contactpagina: e-mailknop.
+ * Alleen de donkere variant wordt aangepast.
+ */
+:root[data-theme='dark'] .email-button {
+  border-color: var(--color-button);
+  background: var(--color-button);
+  color: var(--color-button-text);
+}
+
+:root[data-theme='dark'] .email-button:hover {
+  background: var(--color-button-hover);
+  color: var(--color-button-text);
+}
+
+/*
+ * Contactpagina: afsluitende sectie.
+ * Beide thema's gebruiken een donkere achtergrond.
+ */
+:root body .closing-section {
+  background: var(--color-closing-background);
+  color: var(--color-closing-text);
+}
+
+:root body .closing-section .closing-content .eyebrow,
+:root body .closing-section .closing-content em {
+  color: var(--color-closing-accent);
+}
+
+/*
+ * Zonder JavaScript moet ook de contactpagina
+ * de donkere systeemvoorkeur ondersteunen.
+ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .email-button {
+    border-color: var(--color-button);
+    background: var(--color-button);
+    color: var(--color-button-text);
+  }
+
+  :root:not([data-theme]) .email-button:hover {
+    background: var(--color-button-hover);
+    color: var(--color-button-text);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

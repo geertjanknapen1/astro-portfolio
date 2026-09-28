@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArrowIcon from '../../components/ArrowIcon.astro';
+import ProjectImage from '../../components/ProjectImage.astro';
 import {
   getCollection,
   render,
@@ -125,6 +126,23 @@ const projectNumber = String(
         </dl>
       </div>
     </header>
+
+    {
+      project.data.coverImage && (
+        <section
+          class="project-visual"
+          aria-label={`Afbeelding bij ${project.data.title}`}
+        >
+          <div class="container">
+            <ProjectImage
+              src={project.data.coverImage}
+              alt={`Visualisatie van het project ${project.data.title}`}
+              caption={project.data.coverCaption}
+            />
+          </div>
+        </section>
+      )
+    }
 
     <section class="project-story">
       <div class="container story-layout">
@@ -330,6 +348,16 @@ const projectNumber = String(
     font-weight: 600;
   }
 
+  /* Projectafbeelding */
+
+  .project-visual {
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .project-visual .container {
+    max-width: 1120px;
+  }
+
   /* Projectverhaal */
 
   .project-story {
@@ -459,8 +487,6 @@ const projectNumber = String(
     gap: 1rem;
     margin-top: 2rem;
   }
-
-  /* Eén navigatiekaart krijgt de volledige breedte. */
 
   .navigation-grid > .navigation-card:only-child {
     grid-column: 1 / -1;

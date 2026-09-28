@@ -1,5 +1,6 @@
 ---
 import ArrowIcon from './ArrowIcon.astro';
+import ProjectImage from './ProjectImage.astro';
 
 interface Props {
   title: string;
@@ -7,6 +8,7 @@ interface Props {
   tags: string[];
   href: string;
   number?: string;
+  coverImage?: string | undefined;
 }
 
 const {
@@ -15,33 +17,50 @@ const {
   tags,
   href,
   number,
+  coverImage,
 } = Astro.props;
 ---
 
 <article class="project-card">
   <a href={href}>
     <div class="project-header">
-      {number && (
-        <span class="project-number">{number}</span>
-      )}
+      {
+        number && (
+          <span class="project-number">{number}</span>
+        )
+      }
 
       <span class="project-arrow">
         <ArrowIcon size={26} />
       </span>
     </div>
 
-    <div class="project-content">
-      <h3>{title}</h3>
+    <div class="project-main">
+      <div class="project-content">
+        <h3>{title}</h3>
 
-      <p>{description}</p>
+        <p>{description}</p>
 
-      <ul aria-label={`Tech stack van ${title}`}>
-        {
-          tags.map((tag) => (
-            <li>{tag}</li>
-          ))
-        }
-      </ul>
+        <ul aria-label={`Tech stack van ${title}`}>
+          {
+            tags.map((tag) => (
+              <li>{tag}</li>
+            ))
+          }
+        </ul>
+      </div>
+
+      {
+        coverImage && (
+          <div class="project-thumbnail">
+            <ProjectImage
+              src={coverImage}
+              alt={`Visualisatie van het project ${title}`}
+              variant="thumbnail"
+            />
+          </div>
+        )
+      }
     </div>
   </a>
 </article>
@@ -53,7 +72,7 @@ const {
 
   .project-card > a {
     display: grid;
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 140px minmax(0, 1fr);
     gap: clamp(1.5rem, 5vw, 4rem);
     padding-block: 2.5rem;
     transition:
@@ -80,6 +99,19 @@ const {
   .project-arrow {
     display: none;
     color: var(--color-brick);
+  }
+
+  .project-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 4rem);
+    min-width: 0;
+  }
+
+  .project-content {
+    flex: 1;
+    min-width: 0;
   }
 
   h3 {
@@ -110,10 +142,32 @@ const {
     font-weight: 600;
   }
 
+  .project-thumbnail {
+    flex: 0 0 clamp(180px, 30%, 320px);
+    min-width: 0;
+  }
+
+  @media (max-width: 850px) {
+    .project-main {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .project-thumbnail {
+      width: min(100%, 420px);
+      flex: none;
+    }
+  }
+
   @media (max-width: 650px) {
     .project-card > a {
       grid-template-columns: 1fr;
       gap: 1rem;
+    }
+
+    .project-header {
+      align-items: center;
     }
 
     .project-arrow {

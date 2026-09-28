@@ -50,10 +50,7 @@ const professionalCount = projects.filter(
                 data-filter="all"
                 aria-pressed="true"
               >
-                <span
-                  class="filter-check"
-                  aria-hidden="true"
-                >
+                <span class="filter-check" aria-hidden="true">
                   ✓
                 </span>
                 Alle projecten
@@ -68,10 +65,7 @@ const professionalCount = projects.filter(
                 data-filter="personal"
                 aria-pressed="false"
               >
-                <span
-                  class="filter-check"
-                  aria-hidden="true"
-                >
+                <span class="filter-check" aria-hidden="true">
                   ✓
                 </span>
                 Eigen projecten
@@ -86,10 +80,7 @@ const professionalCount = projects.filter(
                 data-filter="professional"
                 aria-pressed="false"
               >
-                <span
-                  class="filter-check"
-                  aria-hidden="true"
-                >
+                <span class="filter-check" aria-hidden="true">
                   ✓
                 </span>
                 Professioneel
@@ -132,6 +123,7 @@ const professionalCount = projects.filter(
                 href={internalPath(
                   `projecten/${project.id}/`
                 )}
+                coverImage={project.data.coverImage}
               />
             </div>
           ))

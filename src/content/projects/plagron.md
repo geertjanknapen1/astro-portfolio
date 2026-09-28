@@ -12,6 +12,8 @@ tags:
   - GraphQL
   - Shopify
 employer: "Bertels Holland B.V."
+coverImage: "images/projects/plagron/plagron-website-altered.png"
+coverCaption: "Al-gegenereerde visualisatie op basis van de oorspronkelijke Plagron website. De afbeelding is aangepast om het project te illustreren zonder de originele website rechtstreeks over te nemen. Details kunnen afwijken van de daadwerkelijke implementatie."
 ---
 
 ## Het project

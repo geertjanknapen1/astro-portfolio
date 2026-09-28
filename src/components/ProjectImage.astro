@@ -1,0 +1,127 @@
+---
+import { internalPath } from '../utils/paths';
+
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string | undefined;
+  variant?: 'cover' | 'thumbnail';
+}
+
+const {
+  src,
+  alt,
+  caption,
+  variant = 'cover',
+} = Astro.props;
+
+const imagePath = internalPath(src);
+---
+
+<figure class:list={['project-image', variant]}>
+  <div class="image-frame">
+    <img
+      src={imagePath}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
+  {
+    caption && variant === 'cover' && (
+      <figcaption class="image-caption">
+        <svg
+          class="info-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.75"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 16v-4" />
+          <path d="M12 8h.01" />
+        </svg>
+
+        <span class="caption-text">{caption}</span>
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .project-image {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+  }
+
+  .image-frame {
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-sand);
+  }
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+
+  .cover .image-frame {
+    padding: clamp(0.5rem, 2vw, 1.25rem);
+  }
+
+  .cover img {
+    border-radius: 6px;
+  }
+
+  .cover .image-caption {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1.25rem;
+
+    width: 100%;
+    max-width: none;
+    margin: 1.5rem 0 0;
+    padding: 0;
+
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    line-height: 1.7;
+    text-align: left;
+  }
+
+  .info-icon {
+    display: block;
+    flex: 0 0 20px;
+    margin-top: 0.15rem;
+    color: var(--color-brick);
+  }
+
+  .caption-text {
+    display: block;
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    text-align: left;
+  }
+
+  .thumbnail .image-frame {
+    aspect-ratio: 3 / 2;
+  }
+
+  .thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+</style>

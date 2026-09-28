@@ -26,11 +26,10 @@ const pageTitle =
     ? `${siteName} | Backenddeveloper`
     : `${title} | ${siteName}`;
 
-// Astro.url bevat de actuele pagina-URL.
-// Eventuele queryparameters en fragmenten
-// horen niet thuis in een canonical URL.
-
-const canonicalUrl = new URL(Astro.url.pathname, Astro.url.origin);
+const canonicalUrl = new URL(
+  Astro.url.pathname,
+  Astro.url.origin
+);
 
 const canonical = canonicalUrl.toString();
 
@@ -54,8 +53,57 @@ const robotsContent = noindex
       content="#f7f4ee"
     />
 
-    <!-- Algemene SEO -->
+    <!--
+      Dit script draait direct tijdens het inlezen
+      van de pagina, voordat de inhoud wordt getoond.
+    -->
+    <script is:inline>
+      (() => {
+        const storageKey = 'portfolio-theme';
+        const root = document.documentElement;
+        const systemTheme = window.matchMedia(
+          '(prefers-color-scheme: dark)'
+        );
 
+        let preference = 'auto';
+
+        try {
+          const stored = localStorage.getItem(storageKey);
+
+          if (
+            stored === 'light' ||
+            stored === 'dark'
+          ) {
+            preference = stored;
+          }
+        } catch {
+          // Zonder opslag blijft de systeemvoorkeur werken.
+        }
+
+        const effectiveTheme =
+          preference === 'auto'
+            ? systemTheme.matches
+              ? 'dark'
+              : 'light'
+            : preference;
+
+        root.dataset.theme = effectiveTheme;
+        root.dataset.themePreference = preference;
+
+        const themeColor = document.querySelector(
+          'meta[name="theme-color"]'
+        );
+
+        themeColor?.setAttribute(
+          'content',
+          effectiveTheme === 'dark'
+            ? '#1c1815'
+            : '#f7f4ee'
+        );
+      })();
+    </script>
+
+    <!-- Algemene SEO -->
     <title>{pageTitle}</title>
 
     <meta
@@ -74,7 +122,6 @@ const robotsContent = noindex
     />
 
     <!-- Open Graph -->
-
     <meta
       property="og:type"
       content={type}
@@ -106,7 +153,6 @@ const robotsContent = noindex
     />
 
     <!-- Twitter / X Cards -->
-
     <meta
       name="twitter:card"
       content="summary"
@@ -123,7 +169,6 @@ const robotsContent = noindex
     />
 
     <!-- Favicon -->
-
     <link
       rel="icon"
       type="image/svg+xml"
