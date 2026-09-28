@@ -2,7 +2,6 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { internalPath } from '../utils/paths';
-
 import '../styles/general.css';
 
 interface Props {
@@ -10,6 +9,8 @@ interface Props {
   description?: string;
   type?: 'website' | 'article';
   noindex?: boolean;
+  socialImage?: string;
+  socialImageAlt?: string;
 }
 
 const {
@@ -17,172 +18,69 @@ const {
   description = 'Het portfolio van Geert-Jan Knapen. Backenddeveloper met een voorliefde voor PHP, Symfony en software die gewoon goed werkt.',
   type = 'website',
   noindex = false,
+  socialImage = 'images/social-preview.png',
+  socialImageAlt = 'Geert-Jan Knapen, backenddeveloper. Ik bouw graag dingen die gewoon goed werken.',
 } = Astro.props;
 
 const siteName = 'Geert-Jan Knapen';
-
-const pageTitle =
-  title === 'Home'
-    ? `${siteName} | Backenddeveloper`
-    : `${title} | ${siteName}`;
-
-const canonicalUrl = new URL(
-  Astro.url.pathname,
-  Astro.url.origin
-);
-
-const canonical = canonicalUrl.toString();
-
-const robotsContent = noindex
-  ? 'noindex, follow'
-  : 'index, follow, max-image-preview:large';
+const pageTitle = title === 'Home' ? `${siteName} | Backenddeveloper` : `${title} | ${siteName}`;
+const canonical = new URL(Astro.url.pathname, Astro.url.origin).toString();
+const imageUrl = new URL(internalPath(socialImage), Astro.url.origin).toString();
+const robotsContent = noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large';
 ---
 
 <!doctype html>
 <html lang="nl">
   <head>
     <meta charset="UTF-8" />
-
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1"
-    />
-
-    <meta
-      name="theme-color"
-      content="#f7f4ee"
-    />
-
-    <!--
-      Dit script draait direct tijdens het inlezen
-      van de pagina, voordat de inhoud wordt getoond.
-    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f7f4ee" />
     <script is:inline>
       (() => {
         const storageKey = 'portfolio-theme';
         const root = document.documentElement;
-        const systemTheme = window.matchMedia(
-          '(prefers-color-scheme: dark)'
-        );
-
+        const systemTheme = window.matchMedia('(prefers-color-scheme: dark)');
         let preference = 'auto';
-
         try {
           const stored = localStorage.getItem(storageKey);
-
-          if (
-            stored === 'light' ||
-            stored === 'dark'
-          ) {
-            preference = stored;
-          }
+          if (stored === 'light' || stored === 'dark') preference = stored;
         } catch {
           // Zonder opslag blijft de systeemvoorkeur werken.
         }
-
-        const effectiveTheme =
-          preference === 'auto'
-            ? systemTheme.matches
-              ? 'dark'
-              : 'light'
-            : preference;
-
+        const effectiveTheme = preference === 'auto' ? (systemTheme.matches ? 'dark' : 'light') : preference;
         root.dataset.theme = effectiveTheme;
         root.dataset.themePreference = preference;
-
-        const themeColor = document.querySelector(
-          'meta[name="theme-color"]'
-        );
-
-        themeColor?.setAttribute(
-          'content',
-          effectiveTheme === 'dark'
-            ? '#1c1815'
-            : '#f7f4ee'
-        );
+        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', effectiveTheme === 'dark' ? '#1c1815' : '#f7f4ee');
       })();
     </script>
 
-    <!-- Algemene SEO -->
     <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content={robotsContent} />
+    <link rel="canonical" href={canonical} />
 
-    <meta
-      name="description"
-      content={description}
-    />
+    <meta property="og:type" content={type} />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:alt" content={socialImageAlt} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
-    <meta
-      name="robots"
-      content={robotsContent}
-    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={socialImageAlt} />
 
-    <link
-      rel="canonical"
-      href={canonical}
-    />
-
-    <!-- Open Graph -->
-    <meta
-      property="og:type"
-      content={type}
-    />
-
-    <meta
-      property="og:locale"
-      content="nl_NL"
-    />
-
-    <meta
-      property="og:site_name"
-      content={siteName}
-    />
-
-    <meta
-      property="og:title"
-      content={pageTitle}
-    />
-
-    <meta
-      property="og:description"
-      content={description}
-    />
-
-    <meta
-      property="og:url"
-      content={canonical}
-    />
-
-    <!-- Twitter / X Cards -->
-    <meta
-      name="twitter:card"
-      content="summary"
-    />
-
-    <meta
-      name="twitter:title"
-      content={pageTitle}
-    />
-
-    <meta
-      name="twitter:description"
-      content={description}
-    />
-
-    <!-- Favicon -->
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href={internalPath('favicon.svg')}
-    />
+    <link rel="icon" type="image/svg+xml" href={internalPath('favicon.svg')} />
   </head>
-
   <body>
     <Header />
-
-    <main id="main-content">
-      <slot />
-    </main>
-
+    <main id="main-content"><slot /></main>
     <Footer />
   </body>
 </html>
