@@ -12,6 +12,7 @@ tags:
   - PostgreSQL
   - Docker
 coverImage: "images/projects/pact/pact-mockup.png"
+coverAlt: "Conceptvisualisatie van Pact op een laptop."
 coverCaption: "AI-gegenereerde conceptmockup van Pact, gebaseerd op het productontwerp en de geplande functionaliteiten. De afbeelding dient ter illustratie van de beoogde gebruikersinterface en is geen weergave van de daadwerkelijk ontwikkelde applicatie."
 ---
 

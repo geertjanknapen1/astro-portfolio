@@ -136,7 +136,7 @@ const projectNumber = String(
           <div class="container">
             <ProjectImage
               src={project.data.coverImage}
-              alt={`Visualisatie van het project ${project.data.title}`}
+              alt={project.data.coverAlt ?? ''}
               caption={project.data.coverCaption}
             />
           </div>

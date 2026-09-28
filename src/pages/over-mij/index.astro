@@ -4,7 +4,7 @@ import ArrowIcon from '../../components/ArrowIcon.astro';
 import { internalPath } from '../../utils/paths';
 
 const portrait = internalPath('images/over-mij/over-mij-headshot.JPEG');
-const portraitAlt = 'Tijdelijke afbeelding: een mock-up van mijn hobbyproject Pact.';
+const portraitAlt = 'Huisgemaakte portretfoto van Geert-Jan Knapen';
 
 const facts = [
   {
@@ -97,7 +97,7 @@ const technologies = [
         <div class="hero-visual">
           <figure class="portrait-frame">
             <figcaption class="portrait-caption">
-              Huisgemaakte portretfoto van Geert-Jan Knapen
+              {portraitAlt}
             </figcaption>
             <img
               src={portrait}

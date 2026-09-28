@@ -10,6 +10,7 @@ tags:
   - PHP
 employer: "Bertels Holland B.V."
 coverImage: "images/projects/shoplocator/plagron-shoplocator-altered.png"
+coverAlt: "Aangepaste visualisatie van de Plagron-shoplocator met een interactieve kaart."
 coverCaption: "AI-gegenereerde visualisatie op basis van de oorspronkelijke shoplocator. De afbeelding is aangepast om het project te illustreren zonder de originele website en het bijbehorende kaartmateriaal rechtstreeks over te nemen. Details kunnen afwijken van de daadwerkelijke implementatie."
 ---
 

@@ -25,6 +25,7 @@ const projects = defineCollection({
     employer: z.string().optional(),
 
     coverImage: z.string().optional(),
+    coverAlt: z.string().optional(),
     coverCaption: z.string().optional(),
   }),
 });
