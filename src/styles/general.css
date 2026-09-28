@@ -10,10 +10,11 @@
 
   --color-paper: #f7f4ee;
   --color-ink: #292724;
-  --color-brick: #a84437;
+  --color-brick: #a13e33;
   --color-sand: #e8ddd0;
   --color-muted: #605951;
   --color-border: #ded7cc;
+  --color-control-border: #81776e;
 
   --font-body: 'DM Sans', sans-serif;
   --font-accent: 'Fraunces', Georgia, serif;
@@ -45,15 +46,29 @@ a:hover {
   color: var(--color-brick);
 }
 
-a:focus-visible {
+:where(
+  a,
+  button,
+  summary,
+  input,
+  select,
+  textarea,
+  [tabindex]:not([tabindex="-1"])
+):focus-visible {
   outline: 3px solid var(--color-brick);
-  outline-offset: 5px;
+  outline-offset: 4px;
+  box-shadow: 0 0 0 2px var(--color-paper);
 }
 
 button,
 input,
+select,
 textarea {
   font: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
 }
 
 img {

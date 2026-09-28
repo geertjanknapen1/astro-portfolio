@@ -5,44 +5,24 @@ import ArrowIcon from './ArrowIcon.astro';
 const currentPath = Astro.url.pathname;
 
 const navigation = [
-  {
-    label: 'Over mij',
-    href: internalPath('over-mij/'),
-  },
-  {
-    label: 'Werk',
-    href: internalPath('werk/'),
-  },
-  {
-    label: 'Projecten',
-    href: internalPath('projecten/'),
-  },
-  {
-    label: 'Contact',
-    href: internalPath('contact/'),
-  },
+  { label: 'Over mij', href: internalPath('over-mij/') },
+  { label: 'Werk', href: internalPath('werk/') },
+  { label: 'Projecten', href: internalPath('projecten/') },
+  { label: 'Contact', href: internalPath('contact/') },
 ];
 
-const normalizePath = (path: string): string => {
-  return path.endsWith('/') ? path : `${path}/`;
-};
+const normalizePath = (path: string): string =>
+  path.endsWith('/') ? path : `${path}/`;
 
 const isActive = (href: string): boolean => {
   const current = normalizePath(currentPath);
   const target = normalizePath(href);
 
-  return (
-    current === target ||
-    current.startsWith(target)
-  );
+  return current === target || current.startsWith(target);
 };
 
-const isCurrentPage = (href: string): boolean => {
-  return (
-    normalizePath(currentPath) ===
-    normalizePath(href)
-  );
-};
+const isCurrentPage = (href: string): boolean =>
+  normalizePath(currentPath) === normalizePath(href);
 
 const homePath = internalPath();
 const isHome = isCurrentPage(homePath);
@@ -55,10 +35,7 @@ const isHome = isCurrentPage(homePath);
 <header class="site-header">
   <div class="container header-inner">
     <a
-      class:list={[
-        'logo',
-        { 'logo--active': isHome },
-      ]}
+      class:list={['logo', { 'logo--active': isHome }]}
       href={homePath}
       aria-label="Geert-Jan Knapen, naar homepage"
       aria-current={isHome ? 'page' : undefined}
@@ -67,7 +44,6 @@ const isHome = isCurrentPage(homePath);
     </a>
 
     <!-- Desktopnavigatie -->
-
     <nav
       class="desktop-navigation"
       aria-label="Hoofdnavigatie"
@@ -82,9 +58,7 @@ const isHome = isCurrentPage(homePath);
               <li>
                 <a
                   href={item.href}
-                  class:list={{
-                    'nav-link--active': active,
-                  }}
+                  class:list={{ 'nav-link--active': active }}
                   aria-current={
                     current ? 'page' : undefined
                   }
@@ -99,20 +73,14 @@ const isHome = isCurrentPage(homePath);
     </nav>
 
     <!-- Mobiele navigatie -->
-
     <details
       class="mobile-navigation"
       id="mobile-menu"
     >
       <summary class="menu-toggle">
-        <span class="menu-label">
-          Menu
-        </span>
+        <span class="menu-label">Menu</span>
 
-        <span
-          class="menu-icon"
-          aria-hidden="true"
-        >
+        <span class="menu-icon" aria-hidden="true">
           <span></span>
           <span></span>
         </span>
@@ -175,6 +143,11 @@ const isHome = isCurrentPage(homePath);
     );
 
   if (mobileMenu) {
+    const menuToggle =
+      mobileMenu.querySelector<HTMLElement>(
+        'summary'
+      );
+
     document.addEventListener(
       'keydown',
       (event: KeyboardEvent) => {
@@ -183,10 +156,7 @@ const isHome = isCurrentPage(homePath);
           mobileMenu.open
         ) {
           mobileMenu.open = false;
-
-          mobileMenu
-            .querySelector<HTMLElement>('summary')
-            ?.focus();
+          menuToggle?.focus();
         }
       }
     );
@@ -211,7 +181,22 @@ const isHome = isCurrentPage(homePath);
       'change',
       (event: MediaQueryListEvent) => {
         if (event.matches) {
-          mobileMenu.open = false;
+          if (
+            mobileMenu.open &&
+            mobileMenu.contains(
+              document.activeElement
+            )
+          ) {
+            mobileMenu.open = false;
+
+            document
+              .querySelector<HTMLElement>(
+                '.desktop-navigation a'
+              )
+              ?.focus();
+          } else {
+            mobileMenu.open = false;
+          }
         }
       }
     );
@@ -219,8 +204,6 @@ const isHome = isCurrentPage(homePath);
 </script>
 
 <style>
-  /* Direct naar inhoud */
-
   .skip-link {
     position: absolute;
     z-index: 100;
@@ -237,8 +220,6 @@ const isHome = isCurrentPage(homePath);
     color: white;
   }
 
-  /* Algemene header */
-
   .site-header {
     position: relative;
     z-index: 50;
@@ -253,8 +234,6 @@ const isHome = isCurrentPage(homePath);
     gap: 2rem;
     min-height: 88px;
   }
-
-  /* Logo */
 
   .logo {
     position: relative;
@@ -278,8 +257,6 @@ const isHome = isCurrentPage(homePath);
     background: var(--color-brick);
     content: '';
   }
-
-  /* Desktopnavigatie */
 
   .desktop-navigation ul {
     display: flex;
@@ -315,6 +292,7 @@ const isHome = isCurrentPage(homePath);
   }
 
   .desktop-navigation a:hover::after,
+  .desktop-navigation a:focus-visible::after,
   .desktop-navigation a.nav-link--active::after {
     transform: scaleX(1);
   }
@@ -322,8 +300,6 @@ const isHome = isCurrentPage(homePath);
   .desktop-navigation a.nav-link--active {
     color: var(--color-brick);
   }
-
-  /* Mobiele navigatie */
 
   .mobile-navigation {
     display: none;
@@ -342,11 +318,6 @@ const isHome = isCurrentPage(homePath);
       display: block;
     }
 
-    /*
-     * Alleen de menuknop krijgt
-     * een subtiele afgeronde border.
-     */
-
     .menu-toggle {
       display: inline-flex;
       align-items: center;
@@ -354,7 +325,7 @@ const isHome = isCurrentPage(homePath);
       gap: 0.85rem;
       min-height: 44px;
       padding: 0.65rem 1rem;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--color-control-border);
       border-radius: 25px;
       background: transparent;
       color: var(--color-ink);
@@ -382,18 +353,11 @@ const isHome = isCurrentPage(homePath);
       color: var(--color-brick);
     }
 
-    .menu-toggle:focus-visible {
-      outline: 3px solid var(--color-brick);
-      outline-offset: 4px;
-    }
-
     .mobile-navigation[open] .menu-toggle {
       border-color: var(--color-brick);
       background: var(--color-sand);
       color: var(--color-brick);
     }
-
-    /* Hamburgericoon */
 
     .menu-icon {
       display: flex;
@@ -425,8 +389,6 @@ const isHome = isCurrentPage(homePath);
       transform: translateY(-4px) rotate(-45deg);
     }
 
-    /* Uitklapbaar menu */
-
     .mobile-menu-panel {
       position: absolute;
       top: 100%;
@@ -456,8 +418,6 @@ const isHome = isCurrentPage(homePath);
     .mobile-menu-panel li:first-child {
       border-top: 1px solid var(--color-border);
     }
-
-    /* Navigatielinks */
 
     .mobile-menu-panel a {
       display: grid;
@@ -506,8 +466,6 @@ const isHome = isCurrentPage(homePath);
       color: var(--color-brick);
     }
 
-    /* Onderschrift */
-
     .mobile-menu-footer {
       width: min(100%, var(--container-width));
       margin: 2rem auto 0;
@@ -517,8 +475,6 @@ const isHome = isCurrentPage(homePath);
       font-style: italic;
     }
   }
-
-  /* Kleine telefoons */
 
   @media (max-width: 380px) {
     .mobile-menu-panel a {
@@ -531,8 +487,6 @@ const isHome = isCurrentPage(homePath);
       font-size: 1.65rem;
     }
   }
-
-  /* Minder beweging */
 
   @media (prefers-reduced-motion: reduce) {
     .desktop-navigation a::after,
