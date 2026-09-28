@@ -6,247 +6,403 @@ import ProjectCard from '../components/ProjectCard.astro';
 import { getCollection } from 'astro:content';
 import { internalPath } from '../utils/paths';
 
-const projects = (await getCollection('projects', ({ data }) => data.featured)).sort(
-    (a, b) => a.data.order - b.data.order,
+const projects = (
+  await getCollection('projects', ({ data }) => data.featured)
+).sort(
+  (a, b) =>
+    a.data.order - b.data.order ||
+    a.id.localeCompare(b.id),
 );
 ---
 
 <BaseLayout
-    title="Home"
-    description="Geert-Jan Knapen: backenddeveloper met een voorliefde voor PHP, Symfony en software die gewoon goed werkt."
+  title="Home"
+  description="Geert-Jan Knapen: backenddeveloper met een voorliefde voor PHP, Symfony en software die gewoon goed werkt."
 >
-    <section class="hero">
-        <div class="container hero-inner">
-            <div class="hero-content">
-                <p class="eyebrow">Hallo, ik ben Geert-Jan 👋</p>
+  <!-- HERO -->
 
-                <h1>
-                    Ik bouw graag dingen die
-                    <span>gewoon goed werken.</span>
-                </h1>
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <p class="eyebrow">
+          Hallo, ik ben Geert-Jan 👋
+        </p>
 
-                <p class="intro">
-                    Backenddeveloper met een voorliefde voor PHP,
-                    Symfony en oplossingen waar mensen écht iets aan hebben.
-                </p>
+        <h1>
+          Ik bouw graag dingen die
+          <span>gewoon goed werken.</span>
+        </h1>
 
-                <div class="hero-actions">
-                    <a class="button" href="#over-mij">
-                        Even kennismaken?
-                        <ArrowIcon size={20} />
-                    </a>
+        <p class="intro">
+          Backenddeveloper met een voorliefde
+          voor PHP, Symfony en oplossingen
+          waar mensen écht iets aan hebben.
+        </p>
 
-                    <a
-                        class="button button--outline"
-                        href="#achter-de-schermen"
-                    >
-                        Achter de schermen
-                    </a>
-                </div>
-            </div>
+        <div class="hero-actions">
+          <a
+            class="button"
+            href={internalPath('over-mij/')}
+          >
+            Even kennismaken?
 
-            <div class="hero-note">
-                <span class="note-label">Reminder</span>
+            <ArrowIcon size={20} />
+          </a>
 
-                <p>
-                    Niet lullen, maar poetsen.
-                    <em>Wel eerst even nadenken.</em>
-                </p>
-            </div>
+          <a
+            class="button button--outline"
+            href="#achter-de-schermen"
+          >
+            Achter de schermen
+          </a>
         </div>
-    </section>
+      </div>
 
-    <section id="over-mij" class="about-section">
-        <div class="container about-inner">
-            <div>
-                <p class="eyebrow">Even voorstellen</p>
+      <div class="hero-note">
+        <span class="note-label">
+          Reminder
+        </span>
 
-                <h2>
-                    Meer dan alleen
-                    <em>code.</em>
-                </h2>
-            </div>
+        <p>
+          Niet lullen, maar poetsen.
 
-            <div class="about-copy">
-                <p>
-                    Ik ben Geert-Jan Knapen. Mij maak je blij met
-                    technische uitdagingen, nette code en software
-                    die echt het verschil maakt.
-                </p>
+          <em>
+            Wel eerst even nadenken.
+          </em>
+        </p>
+      </div>
+    </div>
+  </section>
 
-                <p>
-                    Ik werk het liefst aan de backend van applicaties.
-                    Niet omdat de frontend niet belangrijk of interessant is,
-                    maar omdat ik het gigantisch tof vind als alles achter
-                    de schermen doet wat het moet doen.
-                </p>
+  <!-- OVER MIJ -->
 
-                <p>
-                    Buiten werktijd? Dan ga ik er graag op uit.
-                    Een concert, een avondje lachen met vrienden
-                    of lekker aan het carnavallen.
-                </p>
-            </div>
+  <section
+    id="over-mij"
+    class="about-section"
+  >
+    <div class="container about-inner">
+      <div class="about-heading">
+        <p class="eyebrow">
+          Even voorstellen
+        </p>
+
+        <h2>
+          Meer dan alleen
+          <em>code.</em>
+        </h2>
+
+        <span
+          class="about-decoration"
+          aria-hidden="true"
+        >
+          *
+        </span>
+      </div>
+
+      <div class="about-copy">
+        <p class="about-lead">
+          Backenddeveloper, Limburger
+          en blijkbaar iemand die ook
+          in zijn vrije tijd graag
+          achter een computer zit.
+        </p>
+
+        <p>
+          Ik ben Geert-Jan Knapen.
+          Ik houd van technische uitdagingen,
+          nette code en software waar
+          mensen daadwerkelijk iets
+          aan hebben.
+        </p>
+
+        <p>
+          Maar gelukkig bestaat mijn
+          leven uit meer dan alleen
+          PHP en databases.
+        </p>
+
+        <p>
+          Concerten, vrienden,
+          carnaval en af en toe
+          nog een eigen project.
+          Stilzitten is blijkbaar
+          niet helemaal mijn ding.
+        </p>
+
+        <a
+          class="about-link"
+          href={internalPath('over-mij/')}
+        >
+          Meer over mij
+
+          <ArrowIcon size={20} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTEN -->
+
+  <section
+    id="achter-de-schermen"
+    class="projects-section"
+  >
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">
+            Achter de schermen
+          </p>
+
+          <h2>
+            Dingen waar ik
+            aan heb gebouwd.
+          </h2>
         </div>
-    </section>
 
-    <section
-        id="achter-de-schermen"
-        class="projects-section"
-    >
-        <div class="container">
-            <div class="section-heading">
-                <div>
-                    <p class="eyebrow">Achter de schermen</p>
+        <p>
+          Van eigen projecten tot
+          werk waar ik met plezier
+          mijn tanden in heb gezet.
+        </p>
+      </div>
 
-                    <h2>Dingen waar ik aan heb gebouwd.</h2>
-                </div>
-
-                <p>
-                    Van eigen projecten tot werk waar ik met plezier
-                    mijn tanden in heb gezet.
-                </p>
-            </div>
-
-            <div class="project-list">
-                {
-                    projects.map((project, index) => (
-                        <ProjectCard
-                            number={String(index + 1).padStart(2, '0')}
-                            title={project.data.title}
-                            description={project.data.description}
-                            tags={project.data.tags}
-                            href={internalPath(`projecten/${project.id}/`)}
-                        />
-                    ))
-                }
-            </div>
-        </div>
-    </section>
+      <div class="project-list">
+        {
+          projects.map((project, index) => (
+            <ProjectCard
+              number={String(index + 1).padStart(2, '0')}
+              title={project.data.title}
+              description={project.data.description}
+              tags={project.data.tags}
+              coverImage={project.data.coverImage}
+              href={internalPath(`projecten/${project.id}/`)}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
-    .hero {
-        padding-block: clamp(5rem, 12vw, 10rem);
-    }
+  /* HERO */
 
-    .hero-inner {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) 260px;
-        align-items: end;
-        gap: clamp(2rem, 5vw, 5rem);
-    }
+  .hero {
+    padding-block: clamp(5rem, 12vw, 10rem);
+  }
 
-    .hero-content {
-        max-width: 790px;
-    }
+  .hero-inner {
+    display: grid;
+    grid-template-columns:
+      minmax(0, 1fr)
+      260px;
+    align-items: end;
+    gap: clamp(2rem, 5vw, 5rem);
+  }
 
-    h1 {
-        max-width: 800px;
-        margin-block: 1.5rem;
-        font-size: clamp(3.2rem, 7vw, 6.5rem);
-        font-weight: 700;
-        line-height: 1.05;
-    }
+  .hero-content {
+    max-width: 790px;
+  }
 
-    h1 span {
-        margin-left: 0.15em;
-        color: var(--color-brick);
-    }
+  h1 {
+    max-width: 800px;
+    margin-block: 1.5rem;
+    font-size: clamp(3.0rem, 6.0vw, 6.0rem);
+    font-weight: 700;
+    line-height: 1.05;
+  }
 
-    .intro {
-        max-width: 600px;
-        color: var(--color-muted);
-        font-size: clamp(1.1rem, 2vw, 1.35rem);
-    }
+  h1 span {
+    margin-left: 0.15em;
+    color: var(--color-brick);
+  }
 
-    .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1rem;
-        margin-top: 2rem;
-    }
+  .intro {
+    max-width: 600px;
+    color: var(--color-muted);
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+  }
 
-    .hero-actions a {
-        gap: 0.75rem;
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .hero-actions a {
+    gap: 0.75rem;
+  }
+
+  .hero-note {
+    position: relative;
+    margin-bottom: 1rem;
+    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-sand);
+    transform: rotate(3deg);
+  }
+
+  .note-label {
+    color: var(--color-brick);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .hero-note p {
+    margin: 0.75rem 0 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .hero-note em {
+    display: block;
+    margin-top: 0.4rem;
+    font-family: var(--font-accent);
+    font-weight: 500;
+  }
+
+  /* OVER MIJ */
+
+  .about-section {
+    padding-block: clamp(5rem, 9vw, 8rem);
+    background: var(--color-sand);
+  }
+
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 8vw, 7rem);
+  }
+
+  .about-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  h2 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+  }
+
+  .about-heading h2 {
+    margin-block: 1.5rem;
+  }
+
+  .about-heading h2 em {
+    display: block;
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-weight: 500;
+  }
+
+  .about-decoration {
+    margin-top: auto;
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-size: clamp(5rem, 12vw, 9rem);
+    line-height: 0.8;
+  }
+
+  .about-copy {
+    max-width: 550px;
+    font-size: 1.05rem;
+  }
+
+  .about-copy p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .about-lead {
+    font-size: clamp(1.25rem, 2vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.5 !important;
+  }
+
+  .about-copy p:not(.about-lead) {
+    color: var(--color-muted);
+  }
+
+  .about-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--color-brick);
+    color: var(--color-brick);
+    font-weight: 700;
+    transition: gap 180ms ease;
+  }
+
+  .about-link:hover {
+    gap: 1.1rem;
+  }
+
+  /* PROJECTEN */
+
+  .projects-section {
+    padding-block: clamp(6rem, 12vw, 10rem);
+  }
+
+  .section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: clamp(2rem, 5vw, 4rem);
+  }
+
+  .section-heading h2 {
+    max-width: 650px;
+    margin-bottom: 0;
+  }
+
+  .section-heading > p {
+    max-width: 300px;
+    margin-bottom: 0.5rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .project-list {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* RESPONSIVE */
+
+  @media (max-width: 800px) {
+    .hero-inner,
+    .about-inner {
+      grid-template-columns: 1fr;
     }
 
     .hero-note {
-        position: relative;
-        margin-bottom: 1rem;
-        padding: 1.5rem;
-        border: 1px solid var(--color-border);
-        border-radius: 6px;
-        background: var(--color-sand);
-        transform: rotate(3deg);
+      max-width: 320px;
+      margin: 2rem 0 0;
+      transform: rotate(-2deg);
     }
 
-    .note-label {
-        color: var(--color-brick);
-        font-size: 0.75rem;
-        font-weight: 700;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
+    .about-decoration {
+      display: none;
     }
 
-    .hero-note p {
-        margin: 0.75rem 0 0;
-        font-size: 1.2rem;
-        font-weight: 700;
-        line-height: 1.35;
+    .section-heading {
+      align-items: flex-start;
+      flex-direction: column;
     }
+  }
 
-    .hero-note em {
-        display: block;
-        margin-top: 0.4rem;
-        font-family: var(--font-accent);
-        font-weight: 500;
+  @media (prefers-reduced-motion: reduce) {
+    .about-link {
+      transition: none;
     }
-
-    .about-section {
-        padding-block: clamp(4rem, 8vw, 7rem);
-        background: var(--color-sand);
-    }
-
-    .about-inner {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: clamp(2rem, 8vw, 7rem);
-    }
-
-    .projects-section {
-        padding-block: clamp(6rem, 12vw, 10rem);
-    }
-
-    h2 {
-        font-size: clamp(2.5rem, 5vw, 4rem);
-    }
-
-    h2 em {
-        display: block;
-        color: var(--color-brick);
-        font-family: var(--font-accent);
-        font-weight: 500;
-    }
-
-    .about-copy {
-        font-size: 1.05rem;
-    }
-
-    .about-copy p {
-        margin-bottom: 1.5rem;
-    }
-
-    @media (max-width: 800px) {
-        .hero-inner,
-        .about-inner {
-            grid-template-columns: 1fr;
-        }
-
-        .hero-note {
-            max-width: 320px;
-            margin: 2rem 0 0;
-            transform: rotate(-2deg);
-        }
-    }
+  }
 </style>
