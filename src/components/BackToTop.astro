@@ -1,0 +1,113 @@
+<button
+  id="back-to-top"
+  class="back-to-top"
+  type="button"
+  aria-label="Terug naar boven"
+  title="Terug naar boven"
+  hidden
+>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="22"
+    height="22"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path d="m18 15-6-6-6 6" />
+  </svg>
+</button>
+
+<script>
+  const button = document.querySelector<HTMLButtonElement>(
+    '#back-to-top'
+  );
+
+  const reducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)'
+  );
+
+  function updateVisibility(): void {
+    if (!button) return;
+
+    button.hidden = window.scrollY <= 400;
+  }
+
+  button?.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: reducedMotion.matches ? 'instant' : 'smooth',
+    });
+
+    // Toetsenbordgebruikers krijgen een logisch focuspunt.
+    document
+      .querySelector<HTMLElement>('.site-header .logo')
+      ?.focus({ preventScroll: true });
+  });
+
+  window.addEventListener('scroll', updateVisibility, {
+    passive: true,
+  });
+
+  updateVisibility();
+</script>
+
+<style>
+  .back-to-top {
+    position: fixed;
+    right: clamp(1.25rem, 4vw, 3rem);
+    bottom: clamp(1.25rem, 4vw, 3rem);
+    z-index: 40;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 52px;
+    height: 52px;
+    padding: 0;
+
+    border: 1px solid var(--color-brick);
+    border-radius: 50%;
+
+    background: var(--color-paper);
+    color: var(--color-brick);
+
+    box-shadow: 0 4px 16px var(--color-menu-shadow);
+    cursor: pointer;
+
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      transform 180ms ease;
+  }
+
+  .back-to-top[hidden] {
+    display: none;
+  }
+
+  .back-to-top:hover {
+    background: var(--color-brick);
+    color: var(--color-paper);
+    transform: translateY(-3px);
+  }
+
+  .back-to-top:focus-visible {
+    outline: 3px solid var(--color-brick);
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .back-to-top {
+      transition: none;
+    }
+
+    .back-to-top:hover {
+      transform: none;
+    }
+  }
+</style>

@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import BackToTop from '../components/BackToTop.astro';
 import { internalPath } from '../utils/paths';
 import '../styles/general.css';
 
@@ -82,5 +83,6 @@ const robotsContent = noindex ? 'noindex, follow' : 'index, follow, max-image-pr
     <Header />
     <main id="main-content"><slot /></main>
     <Footer />
+    <BackToTop />
   </body>
 </html>

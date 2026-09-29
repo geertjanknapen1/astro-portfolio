@@ -18,6 +18,7 @@
   --color-button-text: #ffffff;
   --color-selection-text: #ffffff;
   --color-menu-shadow: rgba(41, 39, 36, 0.07);
+  --color-header: #f7f4ee;
 
   /* Afsluitende sectie van de contactpagina */
   --color-closing-background: #292724;
@@ -50,6 +51,7 @@
   --color-button-text: #ffffff;
   --color-selection-text: #1c1815;
   --color-menu-shadow: rgba(0, 0, 0, 0.25);
+  --color-header: #1c1815;
 
   --color-closing-background: #302721;
   --color-closing-text: #f5efe7;
@@ -88,6 +90,7 @@
 }
 
 html {
+  scroll-padding-top: 110xp;
   scroll-behavior: smooth;
 }
 
@@ -262,5 +265,11 @@ h3 {
 
   .button:hover {
     transform: none;
+  }
+}
+
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 96px;
   }
 }
