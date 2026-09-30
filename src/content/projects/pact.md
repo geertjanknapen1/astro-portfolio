@@ -1,6 +1,6 @@
 ---
 title: "Pact"
-description: "Een eigen project waarin ik mezelf uitdaag om met Symfony een complete SaaS-applicatie te ontwikkelen."
+description: "Stagnatie is regressie. Een project waarin ik mezelf uitdaag om met Symfony een complete SaaS-applicatie te ontwikkelen."
 category: personal
 status: in-progress
 year: 2026
@@ -17,7 +17,7 @@ coverCaption: "AI-gegenereerde conceptmockup van Pact, gebaseerd op het producto
 technicalIntro: "Bij Pact kan ik de technische keuzes zelf maken. Ik kies bewust voor een vertrouwde basis, zodat ik mijn aandacht kan richten op architectuur, betrouwbaarheid en de goedkeuringsworkflow."
 technicalChoices:
   - title: "Symfony & PHP"
-    description: "Symfony geeft me een duidelijke structuur voor de verschillende onderdelen van de applicatie. Met onder andere de Workflow-component kan ik expliciet vastleggen welke overgangen een scope mag doorlopen. Zelf vindt ik Symfony een van de meest volwassen frameworks, vandaar dat de keuze vrij snel op Symfony viel."
+    description: "Symfony geeft me een duidelijke structuur voor de verschillende onderdelen van de applicatie. Met onder andere de Workflow-component kan ik expliciet vastleggen welke overgangen een scope mag doorlopen. Wegens het feit dat ik in mijn dagelijkse werk ook met Symfony werk, was de keuze snel gemaakt."
   - title: "PostgreSQL"
     description: "Gebruikers, klanten, scopes en goedkeuringen hangen met elkaar samen. Een relationele database past bij die gegevens en helpt me hun onderlinge relaties zorgvuldig vast te leggen."
   - title: "Docker"
@@ -28,17 +28,19 @@ technicalChoices:
 
 ## Van idee naar applicatie
 
-Naast mijn dagelijkse werk vind ik het leuk om zelf software te ontwikkelen. Niet omdat er een klant op zit te wachten, maar omdat ik graag nieuwe dingen leer en mezelf technisch wil blijven uitdagen.
+Naast mijn dagelijkse werk vind ik het leuk om zelf software te ontwikkelen en te blijven leren. Niet omdat er een klant op wacht, maar omdat ik graag nieuwe dingen leer en mezelf technisch wil blijven ontwikkelen en uitdagen.
 
-Pact is zo'n project.
+Dat is wat Pact is.
 
-Het idee is eenvoudig: een applicatie waarmee freelancers en kleine bureaus de scope van hun projecten kunnen vastleggen en door klanten kunnen laten goedkeuren.
+Het is een eenvoudig idee. Een applicatie waarmee freelancers en kleine bureaus de scope van projecten kunnen vastleggen en laten goedkeuren door hun klanten.
 
-Daarmee wil ik een herkenbaar probleem aanpakken: onduidelijkheid over wat er precies binnen een project valt.
+Pact pakt een herkenbaar probleem aan: "Wat is er afgesproken?".
+
+Het doel van Pact is duidelijk en overzichtelijk te houden wat er concreet voor een deliverable/project is afgesproken.
 
 ## Meer dan alleen functionaliteit
 
-Met Pact geef ik mezelf bewust een realistische casus. Ik wil niet zomaar wat losse functionaliteiten bouwen, maar ervaren wat er komt kijken bij het ontwikkelen van een complete SaaS-applicatie.
+Met Pact geef ik mezelf bewust een realistiche casus. Ik wil niet zomaar wat functionaliteiten verzinnen en bouwen, maar ervaren wat er komt kijken bij het ontwikkelen van een SaaS-applicatie. Van begin, tot eind.
 
 Juist doordat het project een realistisch probleem oplost, word ik gedwongen om verder te kijken dan alleen de code die ik op dat moment schrijf.
 

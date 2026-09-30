@@ -1,6 +1,6 @@
 ---
 title: "Plagron"
-description: "Een meertalige Laravel-website met Statamic CMS, dynamische content en verschillende externe integraties."
+description: "Een meertalige Laravel-website op basis van Statamic CMS, dynamische content en verschillende externe integraties."
 category: professional
 status: completed
 year: 2025
@@ -22,21 +22,21 @@ technicalIntro: "De website is in teamverband ontwikkeld. Deze combinatie van te
 technicalChoices:
   - title: "Laravel & PHP"
     description: "Laravel vormt de basis voor de applicatielogica en de verschillende integraties. Binnen deze bestaande architectuur ontwikkelde ik backendfunctionaliteit die op meerdere plekken kon worden hergebruikt."
-  - title: "Statamic"
-    description: "Als vervanger van een custom CMS viel de keuze al vrij snel op Statamic. Met flexibele contentvelden kunnen contentmanagers zelf pagina's en onderdelen zoals sliders samenstellen. Statamic beheert content voornamelijk via bestanden; in combinatie met caching ondersteunt dat de technische opzet van de website."
+  - title: "Statamic CMS"
+    description: "Als vervanger van een custom CMS viel de keuze al vrij snel op Statamic als Laravel-gebaseerd CMS. Met flexibele contentvelden kunnen contentmanagers zelf pagina's en onderdelen zoals sliders samenstellen. Statamic beheert content voornamelijk via bestanden; in combinatie met caching ondersteunt dat de technische opzet van de website."
   - title: "Blade, Sass & JavaScript"
     description: "Blade verbindt de templates met de Laravel-applicatie. Sass en JavaScript, waaronder jQuery, verzorgen de presentatie en interactie, zoals het dynamisch selecteren van producten in formulieren."
   - title: "Herbruikbare integraties"
-    description: "Bij onder andere Mailchimp en de downloadfunctionaliteit werkte ik aan oplossingen die meerdere formulieren of bestandstypen konden ondersteunen. Zo hoefde dezelfde logica niet telkens opnieuw te worden gebouwd."
+    description: "Bij onder andere MailChimp en de downloadfunctionaliteit werkte ik aan oplossingen die meerdere formulieren of bestandstypen konden ondersteunen. Zo hoefde dezelfde logica niet telkens opnieuw te worden gebouwd."
 ---
 
 ## Het project
 
-Tijdens mijn werk bij Bertels Holland heb ik binnen een team van vijf ontwikkelaars gewerkt aan de website van Plagron.
+Samen met vijf andere supertoffe ontwikkelaars heb ik tijdens mijn werk bij Bertels Holland B.V. gewerkt aan verschillende websites, de interessantste was Plagron.
 
 De website is gebouwd met Laravel in combinatie met Statamic CMS. Wat dit project interessant maakt, is de flexibiliteit van het contentmanagementsysteem en de verschillende technische integraties achter de schermen.
 
-De website moest niet alleen prettig werken voor bezoekers, maar ook eenvoudig te beheren zijn voor de contentmanagers.
+De website moest niet alleen prettig werken voor bezoekers, maar ook eenvoudig te beheren zijn door de contentmanagers, ook zonder dat daar een ontwikkelaar voor nodig is.
 
 ## Mijn bijdrage
 
@@ -44,15 +44,15 @@ Mijn werkzaamheden richtten zich voornamelijk op de backend en de technische int
 
 ### Dynamische sliders
 
-Contentmanagers moesten zelfstandig sliders kunnen toevoegen en beheren, zonder daarvoor een webdeveloper nodig te hebben.
+Contentmanagers moesten zelfstandig sliders kunnen toevoegen en beheren, zonder daarvoor een ontwikkelaar nodig te hebben.
 
-Hiervoor heb ik de backendintegratie ontwikkeld, zodat sliders dynamisch vanuit het CMS kunnen worden samengesteld. Hiermee kregen de contentmanagers meer vrijheid bij het opbouwen van pagina's.
+Hiervoor heb ik een nieuwe backendintegratie geïmplementeerd, zodat sliders dynamisch vanuit het CMS kunnen worden samengesteld. Hiermee kregen de contentmanagers meer vrijheid bij het opbouwen van pagina's.
 
 ### Downloads en e-mailafhandeling
 
-Voor verschillende bestanden moesten bezoekers de mogelijkheid krijgen om deze te downloaden. Afhankelijk van het type bestand kon een download direct beschikbaar zijn of pas nadat een bezoeker zijn e-mailadres had achtergelaten.
+Bezoekers diende de mogelijkheid te krijgen verschillende soorten bestanden te kunnen downloaden. Afhankelijk van het type bestand kon een download direct beschikbaar zijn of pas nadat een bezoeker zijn e-mailadres had achtergelaten.
 
-Ik heb gewerkt aan de downloadintegratie en de bijbehorende e-mailafhandeling. Daarbij moest ook de e-mail met de downloadlink dynamisch worden samengesteld op basis van het betreffende bestandstype.
+Ik heb gewerkt aan de downloadintegratie en de bijbehorende e-mailafhandeling. Daarbij moest de e-mail met de downloadlink dynamisch samengesteld worden op basis van het betreffende bestandstype, moesten de bezoekers als contact naar MailChimp worden gesloten en moest dit natuurlijk volledig beheerbaar zijn door de contentmanagers.
 
 ### Productreviews
 
@@ -64,9 +64,9 @@ Naast deze interactie heb ik gewerkt aan de implementatie van de reviews en de b
 
 ### Mailchimp-integratie
 
-Verschillende formulieren op de website moesten contactgegevens kunnen doorsturen naar Mailchimp.
+Verschillende formulieren en integraties, zoals de downloads, op de website moesten contactgegevens kunnen doorsturen naar MailChimp.
 
-In plaats van voor ieder formulier een afzonderlijke integratie te ontwikkelen, heb ik gewerkt aan een herbruikbare oplossing. Hiermee konden meerdere formulieren gebruikmaken van dezelfde integratie, zonder telkens dezelfde functionaliteit opnieuw te hoeven implementeren.
+In plaats van voor ieder formulier een afzonderlijke integratie te ontwikkelen, heb ik gewerkt aan een herbruikbare oplossing. Hiermee konden meerdere formulieren en integraties gebruikmaken van dezelfde MailChimp-integratie, zonder telkens dezelfde functionaliteit opnieuw te hoeven implementeren.
 
 ## Meer dan alleen een website
 

@@ -29,7 +29,7 @@ technicalChoices:
 
 ## Het project
 
-Tijdens mijn werk bij Bertels Holland heb ik gewerkt aan de shoplocator van Plagron. Met deze functionaliteit kunnen bezoekers via een interactieve kaart verkooppunten vinden waar producten van Plagron verkrijgbaar zijn.
+Tijdens mijn werk bij Bertels Holland B.V. heb ik gewerkt aan de shoplocator van Plagron. Met deze functionaliteit kunnen bezoekers via een interactieve kaart verkooppunten vinden waar producten van Plagron verkrijgbaar zijn.
 
 De shoplocator is onderdeel van de Laravel-website van Plagron. Hoewel ik niet betrokken was bij de oorspronkelijke ontwikkeling, heb ik de grote refactors en verbeteringen aan deze functionaliteit uitgevoerd.
 
