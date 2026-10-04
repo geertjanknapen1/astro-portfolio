@@ -77,12 +77,16 @@ const socialLinks = [
       </div>
 
       <div class="contact-card">
-        <div class="card-heading">
-          <span class="card-label">Direct contact</span>
+        <div class="availability">
+          <span class="availability-dot" aria-hidden="true"></span>
 
-          <span class="card-icon" aria-hidden="true">
-            <ArrowIcon size={24} />
-          </span>
+          <p>
+            <strong>Niet actief op zoek, wel nieuwsgierig.</strong>
+            Voor een interessante backendrol in de regio maak ik graag tijd
+            voor een kop koffie.
+          </p>
+        </div>
+        <div class="card-heading">
         </div>
 
         <div class="card-content">
@@ -292,6 +296,66 @@ const socialLinks = [
     background: var(--color-sand);
   }
 
+  /* Beschikbaarheid */
+  .availability {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .availability-dot {
+    position: relative;
+    flex: 0 0 auto;
+    width: 9px;
+    height: 9px;
+    margin-top: 0.45rem;
+    border-radius: 50%;
+    background: var(--color-brick);
+  }
+
+  .availability-dot::after {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: var(--color-brick);
+    content: '';
+    animation: availability-pulse 2.2s ease-out infinite;
+  }
+
+  @keyframes availability-pulse {
+    0% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+
+    70%,
+    100% {
+      opacity: 0;
+      transform: scale(2.5);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .availability-dot::after {
+      animation: none;
+    }
+  }
+
+  .availability p {
+    max-width: 440px;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .availability strong {
+    display: block;
+    margin-bottom: 0.2rem;
+    color: var(--color-ink);
+  }
+
   .card-heading {
     display: flex;
     align-items: center;
@@ -321,7 +385,7 @@ const socialLinks = [
 
   .card-content {
     margin-block: auto;
-    padding-block: 3rem;
+    padding-block: 2rem;
   }
 
   .card-content h3 {
