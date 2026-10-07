@@ -17,7 +17,7 @@ tags:
 employer: "Bertels Holland B.V."
 coverImage: "images/projects/plagron/plagron-website-altered.png"
 coverAlt: "Aangepaste visualisatie van de Plagron-website."
-coverCaption: "AI-gegenereerde visualisatie op basis van de oorspronkelijke Plagron website. De afbeelding is aangepast om het project te illustreren zonder de originele website rechtstreeks over te nemen. Details kunnen afwijken van de daadwerkelijke implementatie."
+coverCaption: "AI-gegenereerde visualisatie op basis van de oorspronkelijke Plagron-website. De afbeelding is aangepast om het project te illustreren zonder de originele website rechtstreeks over te nemen. Details kunnen afwijken van de daadwerkelijke implementatie."
 technicalIntro: "De website is in teamverband ontwikkeld. Deze combinatie van technieken vormde de basis van het project; mijn bijdrage lag vooral bij de backend, het contentbeheer en de integraties."
 technicalChoices:
   - title: "Laravel & PHP"
@@ -27,7 +27,7 @@ technicalChoices:
   - title: "Blade, Sass & JavaScript"
     description: "Blade verbindt de templates met de Laravel-applicatie. Sass en JavaScript, waaronder jQuery, verzorgen de presentatie en interactie, zoals het dynamisch selecteren van producten in formulieren."
   - title: "Herbruikbare integraties"
-    description: "Bij onder andere MailChimp en de downloadfunctionaliteit werkte ik aan oplossingen die meerdere formulieren of bestandstypen konden ondersteunen. Zo hoefde dezelfde logica niet telkens opnieuw te worden gebouwd."
+    description: "Bij onder andere Mailchimp en de downloadfunctionaliteit werkte ik aan oplossingen die meerdere formulieren of bestandstypen konden ondersteunen. Zo hoefde dezelfde logica niet telkens opnieuw te worden gebouwd."
 ---
 
 ## Het project
@@ -50,9 +50,9 @@ Hiervoor heb ik een nieuwe backendintegratie geïmplementeerd, zodat sliders dyn
 
 ### Downloads en e-mailafhandeling
 
-Bezoekers diende de mogelijkheid te krijgen verschillende soorten bestanden te kunnen downloaden. Afhankelijk van het type bestand kon een download direct beschikbaar zijn of pas nadat een bezoeker zijn e-mailadres had achtergelaten.
+Bezoekers dienden de mogelijkheid te krijgen verschillende soorten bestanden te kunnen downloaden. Afhankelijk van het type bestand kon een download direct beschikbaar zijn of pas nadat een bezoeker zijn e-mailadres had achtergelaten.
 
-Ik heb gewerkt aan de downloadintegratie en de bijbehorende e-mailafhandeling. Daarbij moest de e-mail met de downloadlink dynamisch samengesteld worden op basis van het betreffende bestandstype, moesten de bezoekers als contact naar MailChimp worden gesloten en moest dit natuurlijk volledig beheerbaar zijn door de contentmanagers.
+Ik heb gewerkt aan de downloadintegratie en de bijbehorende e-mailafhandeling. Daarbij moest de e-mail met de downloadlink dynamisch samengesteld worden op basis van het betreffende bestandstype, moesten de bezoekers als contact naar Mailchimp worden geschoten en moest dit natuurlijk volledig beheerbaar zijn door de contentmanagers.
 
 ### Productreviews
 
@@ -64,9 +64,9 @@ Naast deze interactie heb ik gewerkt aan de implementatie van de reviews en de b
 
 ### Mailchimp-integratie
 
-Verschillende formulieren en integraties, zoals de downloads, op de website moesten contactgegevens kunnen doorsturen naar MailChimp.
+Verschillende formulieren en integraties, zoals de downloads, op de website moesten contactgegevens kunnen doorsturen naar Mailchimp.
 
-In plaats van voor ieder formulier een afzonderlijke integratie te ontwikkelen, heb ik gewerkt aan een herbruikbare oplossing. Hiermee konden meerdere formulieren en integraties gebruikmaken van dezelfde MailChimp-integratie, zonder telkens dezelfde functionaliteit opnieuw te hoeven implementeren.
+In plaats van voor ieder formulier een afzonderlijke integratie te ontwikkelen, heb ik gewerkt aan een herbruikbare oplossing. Hiermee konden meerdere formulieren en integraties gebruikmaken van dezelfde Mailchimp-integratie, zonder telkens dezelfde functionaliteit opnieuw te hoeven implementeren.
 
 ## Meer dan alleen een website
 

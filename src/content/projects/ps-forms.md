@@ -22,7 +22,7 @@ technicalChoices:
   - title: "Laravel & Statamic"
     description: "Laravel vormt de applicatiebasis. Statamic maakt het mogelijk om productgegevens als entries beschikbaar te stellen binnen de interne bestelomgeving, zodat accountmanagers ermee kunnen werken."
   - title: "Shopify & GraphQL"
-    description: "De integratie haalt productgegevens via de GraphQL-API van Shopify op. Daarmee kan de applicatie werken met gegevens uit het bestaande e-commerceplatform, zonder die informatie handmatig bij te houden. GraphQL was hier de beter optie om producten en hun relaties in Shopify in bulk op te halen."
+    description: "De integratie haalt productgegevens via de GraphQL-API van Shopify op. Daarmee kan de applicatie werken met gegevens uit het bestaande e-commerceplatform, zonder die informatie handmatig bij te houden. GraphQL was hier de betere optie om producten en hun relaties in Shopify in bulk op te halen."
   - title: "Microservice & caching"
     description: "De productgegevens worden eerst in een microservice gecachet en vervolgens gebruikt om dynamisch Statamic-entries aan te maken. Daardoor hoeft PS Forms niet bij iedere aanvraag opnieuw Shopify te benaderen."
   - title: "Teamleader CRM & API-integraties"
@@ -49,7 +49,7 @@ Een belangrijk onderdeel van het project was de gegevensuitwisseling tussen Shop
 
 Bij deze integratie hield ik me bezig met backendontwikkeling, API-integraties en het bewaken van de technische architectuur. Het combineren van verschillende systemen binnen één applicatie maakte dit een interessant onderdeel van mijn werkzaamheden.
 
-### Architectuur en code reviews
+### Architectuur en code-reviews
 
 Naast mijn eigen ontwikkelwerk was ik betrokken bij het bewaken van de architectuur. Ook beoordeelde ik pull requests om bij te dragen aan de kwaliteit en onderhoudbaarheid van de code.
 
@@ -65,4 +65,4 @@ Daarbij speelde het bewaken van de bestaande architectuur en het onderhoudbaar h
 
 Wat PS Forms voor mij interessant maakt, is de combinatie van backendontwikkeling en technische verantwoordelijkheid.
 
-Daarnaast kreeg ik de mogelijkheid om me bezig te houden met architectuur, code reviews en de doorontwikkeling van bestaande software. Die combinatie laat goed zien wat ik interessant vind aan backendontwikkeling: niet alleen functionaliteiten bouwen, maar ook nadenken over hoe verschillende onderdelen van een applicatie samenwerken.
+Daarnaast kreeg ik de mogelijkheid om me bezig te houden met architectuur, code-reviews en de doorontwikkeling van bestaande software. Die combinatie laat goed zien wat ik interessant vind aan backendontwikkeling: niet alleen functionaliteiten bouwen, maar ook nadenken over hoe verschillende onderdelen van een applicatie samenwerken.

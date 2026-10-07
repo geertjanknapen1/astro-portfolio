@@ -21,7 +21,7 @@ technicalChoices:
   - title: "PostgreSQL"
     description: "Gebruikers, klanten, scopes en goedkeuringen hangen met elkaar samen. Een relationele database past bij die gegevens en helpt me hun onderlinge relaties zorgvuldig vast te leggen."
   - title: "Docker"
-    description: "Ik gebruik Docker om de ontwikkelomgeving reproduceerbaar te houden. Zo draaien de applicatie en de bijbehorende diensten in een consistente omgeving. Verder geeft deze keuze me ook de mogelijkheid om nog zelfverzekerder te worden met het opzetten van Docker omgevingen."
+    description: "Ik gebruik Docker om de ontwikkelomgeving reproduceerbaar te houden. Zo draaien de applicatie en de bijbehorende diensten in een consistente omgeving. Verder geeft deze keuze me ook de mogelijkheid om nog zelfverzekerder te worden met het opzetten van Docker-omgevingen."
   - title: "Geautomatiseerde tests"
     description: "Een goedkeuringsproces moet voorspelbaar zijn: niet iedere actie mag in iedere status worden uitgevoerd. Met tests controleer ik die regels en verklein ik de kans op regressies wanneer ik nieuwe functionaliteit toevoeg."
 ---
@@ -40,7 +40,7 @@ Het doel van Pact is duidelijk en overzichtelijk te houden wat er concreet voor 
 
 ## Meer dan alleen functionaliteit
 
-Met Pact geef ik mezelf bewust een realistiche casus. Ik wil niet zomaar wat functionaliteiten verzinnen en bouwen, maar ervaren wat er komt kijken bij het ontwikkelen van een SaaS-applicatie. Van begin, tot eind.
+Met Pact geef ik mezelf bewust een realistische casus. Ik wil niet zomaar wat functionaliteiten verzinnen en bouwen, maar ervaren wat er komt kijken bij het ontwikkelen van een SaaS-applicatie. Van begin, tot eind.
 
 Juist doordat het project een realistisch probleem oplost, word ik gedwongen om verder te kijken dan alleen de code die ik op dat moment schrijf.
 
