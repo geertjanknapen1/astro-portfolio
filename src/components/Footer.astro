@@ -2,6 +2,24 @@
 import { internalPath } from '../utils/paths';
 
 const year = new Date().getFullYear();
+
+import { execSync } from 'node:child_process';
+
+const lastContentUpdate = execSync(
+  [
+    'git log -1 --format=%cI --',
+    'src/content',
+    'src/pages',
+    'public/images',
+  ].join(' '),
+  { encoding: 'utf-8' }
+).trim();
+
+const formattedLastContentUpdate = new Intl.DateTimeFormat('nl-NL', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(new Date(lastContentUpdate));
 ---
 
 <footer class="site-footer">
@@ -9,7 +27,8 @@ const year = new Date().getFullYear();
     <div>
       <p class="footer-title">Tot zover de voorkant.</p>
       <p>
-        Met aandacht en ❤️ gebouwd door Geert-Jan.
+        Met aandacht en ❤️ gebouwd door Geert-Jan.<br/>
+        <span class="last-updated">Laatst bijgewerkt · {formattedLastContentUpdate}</span>
       </p>
     </div>
 
@@ -69,6 +88,12 @@ const year = new Date().getFullYear();
 
   .footer-meta a:hover {
     color: var(--color-brick);
+  }
+
+  .last-updated {
+    margin: 0;
+    color: var(--color-muted);
+    font-size: 0.75rem;
   }
 
   @media (max-width: 600px) {
