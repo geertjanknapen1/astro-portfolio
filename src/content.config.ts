@@ -26,4 +26,26 @@ const projects = defineCollection({
   }),
 });
 
-export const collections = { projects };
+const articles = defineCollection({
+  loader: glob({
+    pattern: '*.md',
+    base: './src/content/articles',
+  }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishedAt: z.coerce.date(),
+    updatedAt: z.coerce.date().optional(),
+    category: z.enum([
+      'Techniek',
+      'Werk & samenwerking',
+      'Opinie',
+      'Achter de schermen',
+    ]),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(true),
+    disclaimer: z.string().optional(),
+  }),
+});
+
+export const collections = { projects, articles };

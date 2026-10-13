@@ -1,0 +1,218 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArrowIcon from '../../components/ArrowIcon.astro';
+import { getCollection } from 'astro:content';
+import { internalPath } from '../../utils/paths';
+import {
+  getPublishedArticles,
+  formatArticleDate,
+  getReadingTimeInMinutes,
+} from '../../utils/articles';
+
+const articles = getPublishedArticles(
+  await getCollection('articles'),
+);
+---
+
+<BaseLayout
+  title="Uit de praktijk"
+  description="Gedachten over softwareontwikkeling, technische keuzes en de lessen die ik onderweg leer."
+>
+  <section class="articles-hero">
+    <div class="container">
+      <p class="eyebrow">Gedachten & techniek</p>
+
+      <h1>
+        Uit de<br />
+        <em>praktijk.</em>
+      </h1>
+
+      <p class="hero-intro">
+        Over software, technische keuzes en dingen die ik
+        onderweg leer.
+      </p>
+    </div>
+  </section>
+
+  <section class="articles-section">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow">01 / Praktisch plaatje</p>
+        <h2>Op papier.<br /><em>Of nou ja, bijna.</em></h2>
+      </div>
+
+      {
+        articles.length === 0 ? (
+          <p class="empty-state">
+            Er zijn nog geen praktische plaatjes beschikbaar.
+            Eerst nog even wat gedachten op een rijtje zetten.
+          </p>
+        ) : (
+          <ol class="article-list">
+            {articles.map((article, index) => (
+              <li>
+                <a href={internalPath(`praktisch-plaatje/${article.id}/`)}>
+                  <span class="article-number">
+                    {String(index + 1).padStart(2, '0')} /
+                  </span>
+
+                  <div class="article-content">
+                    <p class="article-meta">
+                      <time datetime={article.data.publishedAt.toISOString()}>
+                        {formatArticleDate(article.data.publishedAt)}
+                      </time>
+                      <span aria-hidden="true">·</span>
+                      <span>{article.data.category}</span>
+                      <span aria-hidden="true">·</span>
+                      <span>
+                        {getReadingTimeInMinutes(article.body ?? '')} min lezen
+                      </span>
+                    </p>
+
+                    <h3>{article.data.title}</h3>
+                    <p class="article-description">
+                      {article.data.description}
+                    </p>
+
+                    <span class="article-link">
+                      Lees praktisch plaatje <ArrowIcon size={18} />
+                    </span>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ol>
+        )
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  h1, h2 {
+    letter-spacing: -0.055em;
+  }
+
+  h1 em, h2 em {
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-weight: 500;
+  }
+
+  .articles-hero {
+    padding-block: clamp(5rem, 11vw, 10rem);
+    background: var(--color-sand);
+  }
+
+  h1 {
+    margin-block: 2rem;
+    font-size: clamp(4rem, 10vw, 8rem);
+    line-height: 1.02;
+  }
+
+  .hero-intro {
+    max-width: 720px;
+    margin: 0;
+    color: var(--color-muted);
+    font-size: clamp(1.2rem, 2.5vw, 1.65rem);
+    line-height: 1.6;
+  }
+
+  .articles-section {
+    padding-block: clamp(5rem, 10vw, 9rem);
+  }
+
+  .section-heading {
+    margin-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  h2 {
+    margin-top: 2rem;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+  }
+
+  .article-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .article-list li {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .article-list a {
+    display: grid;
+    grid-template-columns: 100px minmax(0, 1fr);
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding-block: clamp(2rem, 5vw, 3.5rem);
+    color: inherit;
+  }
+
+  .article-number {
+    color: var(--color-brick);
+    font-family: var(--font-accent);
+    font-size: 1.5rem;
+  }
+
+  .article-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  h3 {
+    max-width: 850px;
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.8rem, 4vw, 3.25rem);
+    line-height: 1.15;
+    letter-spacing: -0.045em;
+  }
+
+  .article-description {
+    max-width: 650px;
+    margin-bottom: 1.5rem;
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  .article-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid var(--color-brick);
+    color: var(--color-brick);
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: gap 180ms ease;
+  }
+
+  .article-list a:hover .article-link {
+    gap: 0.9rem;
+  }
+
+  .empty-state {
+    color: var(--color-muted);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 650px) {
+    .article-list a {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .article-link {
+      transition: none;
+    }
+  }
+</style>
