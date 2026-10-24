@@ -99,6 +99,9 @@ const readingMinutes = getReadingTimeInMinutes(article.body ?? '');
                         </div>
 
                         <p>{article.data.disclaimer}</p>
+                        <a href="/astro-portfolio/ai-gebruik-en-werkwijze/">
+                          Meer over AI & mijn werkwijze
+                        </a>
                     </aside>
                 )
             }
@@ -298,7 +301,8 @@ const readingMinutes = getReadingTimeInMinutes(article.body ?? '');
     font-size: 1.2rem;
     }
 
-    .article-disclaimer p {
+    .article-disclaimer p,
+    .article-disclaimer a {
     margin: 0;
     color: var(--color-muted);
     font-size: 0.9rem;
