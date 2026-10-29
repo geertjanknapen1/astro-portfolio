@@ -93,7 +93,7 @@ Ik vind contact met klanten op zichzelf leuk. Het helpt om beter te begrijpen vo
 
 Wanneer mijn dag vooral bestaat uit ticket na ticket, veel schakelen tussen onderwerpen en ondertussen verwachtingen managen, blijft er minder ruimte over voor die verdieping.
 
-Dat voortdurende context switchen vind ik lastig. Het kan bovendien de nadruk verschuiven van kwaliteit naar hoeveelheid, en dat is niet hoe ik het liefst werk.
+Dat voortdurende context switchen vind ik leuk, het houdt je werk dynamisch en veranderlijk. Echter zit er ook een nadeel aan, het kan de nadruk verschuiven van kwaliteit naar kwantiteit, en dat is niet hoe ik het liefst werk. 
 
 Daarom zou ik klantcontact graag als onderdeel van mijn werk houden, maar niet als hoofdzaak. Die twee dingen spreken elkaar niet tegen. Je kunt iets waardevol vinden om te leren, zonder dat je het de hele dag wilt doen.
 
