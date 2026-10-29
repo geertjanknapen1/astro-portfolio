@@ -4,7 +4,7 @@ description: "Een meertalige Laravel-website op basis van Statamic CMS, dynamisc
 category: professional
 status: completed
 year: 2025
-order: 2
+order: 1
 featured: true
 tags:
   - Laravel

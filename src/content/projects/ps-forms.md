@@ -4,7 +4,7 @@ description: "Een interne bestelapplicatie waarin Laravel, microservices, Shopif
 category: professional
 status: completed
 year: 2025
-order: 4
+order: 2
 featured: true
 tags:
   - Laravel

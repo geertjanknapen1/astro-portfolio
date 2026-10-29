@@ -4,7 +4,7 @@ description: "Een Symfony-applicatie voor het vastleggen en goedkeuren van proje
 category: personal
 status: in-progress
 year: 2026
-order: 1
+order: 3
 featured: true
 tags:
   - Symfony
